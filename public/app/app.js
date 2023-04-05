@@ -51,15 +51,10 @@ const handleLogout = () => {
   firebase.auth().signOut();
 };
 
-//add event listener for all buttons
+//add click listners
 document.addEventListener("click", ({ target }) => {
-  //TODO: probably don't need button, why does = equal work?
-  if (target.matches("button")) {
-    //logout
-    //not sure why sure why this works in an if statement condition
-    if ((target.id = "#logout")) {
-      handleLogout();
-    }
+  if (target.id === "#logout") {
+    handleLogout();
   }
 
   if (
