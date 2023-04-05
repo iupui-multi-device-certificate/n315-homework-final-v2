@@ -20,7 +20,7 @@ import {
 //init the firebase app
 firebase.app();
 
-initFormListeners();
+// initFormListeners();
 
 //? maybe move render & handleLogout to separate file?
 //just provide name of view to map to route, render will actually call the function
@@ -70,6 +70,8 @@ const setupUI = (currentUser = null) => {
   window.onhashchange = () => render(currentUser);
   render(currentUser);
 
+  initFormListeners(currentUser);
+
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
 
@@ -87,26 +89,20 @@ const setupUI = (currentUser = null) => {
 // listen for auth status changes
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
-    let userDocData = null;
-    let currentUser = {
-      userDocData,
-      isLoggedIn: false,
-    };
+    let currentUser = null;
+
+    //TODO: use onsnapshot to have the listener for when changes?
     if (user) {
-      userDocData = await firebase
+      currentUser = await firebase
         .firestore()
         .collection("Users")
         .doc(user.uid)
         .get()
         .then((doc) => {
-          console.log(doc.data());
-          return doc.data();
+          const data = doc.data();
+          return { userId: doc.id, ...data, isLoggedIn: true };
         });
 
-      const currentUser = {
-        userDocData,
-        isLoggedIn: true,
-      };
       setupUI(currentUser);
     } else {
       console.log("on AuthStateChanged > user logged out");

@@ -53,10 +53,12 @@ const handleLoginSubmit = (e, loginForm) => {
     });
 };
 
-const handleRecipeSubmit = (e, recipeForm) => {
+const handleRecipeSubmit = (e, recipeForm, { recipes, userId }) => {
+  //TODO: upload images - need find a tutorial
+  //https://firebase.google.com/docs/storage/web/upload-files
   e.preventDefault();
 
-  let recipes = [];
+  // let recipes = [];
   let ingredients = [];
   let instructions = [];
 
@@ -82,12 +84,23 @@ const handleRecipeSubmit = (e, recipeForm) => {
     instructions,
   };
 
-  console.log("recipe", recipe);
+  //probably need to use this for inner recipes.ingredients, etc when edit
+  //https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
+  //make this its own function?
+  firebase
+    .firestore()
+    .collection("Users")
+    .doc(userId)
+    .update({ recipes: firebase.firestore.FieldValue.arrayUnion(recipe) });
+
+  console.log("recipe created");
+
+  recipeForm.reset();
 };
 
 //form event listeners
 //add to document since these are dynamically created.
-export const initFormListeners = () => {
+export const initFormListeners = (currentUser) => {
   document.addEventListener("submit", (e) => {
     // signup
     const signupForm = e.target.closest("#signup-form");
@@ -102,7 +115,7 @@ export const initFormListeners = () => {
     }
 
     if (recipeForm) {
-      handleRecipeSubmit(e, recipeForm);
+      handleRecipeSubmit(e, recipeForm, currentUser);
     }
   });
 };
@@ -111,6 +124,5 @@ const getValuesFromInputsByName = (nameOfList) => {
   const elementList = document.getElementsByName(nameOfList);
 
   const valuesArray = Array.from(elementList).map((el) => el.value);
-  console.log("getValuesFromInputsByName > valuesArray", valuesArray);
   return valuesArray;
 };

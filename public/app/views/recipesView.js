@@ -59,22 +59,22 @@ ${recipeItems.map((recipeItem) => renderRecipeItem(recipeItem)).join("")}
 `;
 
 //destructure
-//TODO: how can I re-use for browse recipes? need a default for recipes - can I destructure further or maybe use spread operator when send it over?
+
 //TODO: check if user logged in but no recipes and add button to create recipess
-export const recipesView = ({ userDocData, isLoggedIn }) => `
+export const recipesView = ({ firstName, isLoggedIn }) => `
 <section class="content section-recipes ${
   isLoggedIn ? `your-recipes` : `browse-recipes`
 }">
   <div class="recipe-content">
     <h1 class="section-title">${
-      isLoggedIn && userDocData.firstName != ""
-        ? `${userDocData.firstName}, here are your recipes!`
+      isLoggedIn && firstName != ""
+        ? `${firstName}, here are your recipes!`
         : `Recipes: Try some today!`
     }</h1>
     <div class="cards">
       ${
         isLoggedIn
-          ? renderRecipeItems(userDocData.recipes)
+          ? renderRecipeItems(recipes)
           : `<p>Log in to see your recipes</p>`
       }
     </div>
