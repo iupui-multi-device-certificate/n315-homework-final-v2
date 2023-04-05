@@ -2,8 +2,10 @@
 
 import { initFormListeners } from "./formHandlers.js";
 import { homeView } from "./views/homeView.js";
-import { loginView } from "./views/loginView.js";
+import { browseView } from "./views/browseView.js";
+import { createRecipeView } from "./views/createRecipeView.js";
 import { recipesView } from "./views/recipesView.js";
+import { loginView } from "./views/loginView.js";
 
 //init the firebase app
 firebase.app();
@@ -14,7 +16,9 @@ initFormListeners();
 //just provide name of view to map to route, render will actually call the function
 const routes = {
   "#home": homeView,
-  "#recipes": recipesView,
+  "#browse": browseView,
+  "#createRecipe": createRecipeView,
+  "#yourRecipes": recipesView,
   "#login": loginView,
 };
 
@@ -49,11 +53,11 @@ const setupUI = (userData = null) => {
   render(userData);
 
   if (userData) {
-    document.getElementById("login").hidden = true;
-    document.getElementById("#logout").hidden = false;
+    document.getElementById("loginNav").hidden = true;
+    document.getElementById("logoutNav").hidden = false;
   } else {
-    document.getElementById("login").hidden = false;
-    document.getElementById("#logout").hidden = true;
+    document.getElementById("loginNav").hidden = false;
+    document.getElementById("logoutNav").hidden = true;
   }
 };
 

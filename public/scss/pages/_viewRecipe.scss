@@ -1,0 +1,84 @@
+.view-recipe {
+  font-family: "Myriad Pro";
+  font-size: 1.25rem;
+  letter-spacing: 4px;
+  line-height: 27px;
+
+  height: fit-content;
+
+  // margin-top:
+  // margin-bottom: 5.938rem;
+}
+
+.recipe-header {
+  display: flex;
+  gap: 0.625rem;
+  width: 100%;
+}
+
+//rotate per Darryl Johnson w/o need for CSS Grid
+//https://stackoverflow.com/questions/20880244/rotate-text-90deg-and-vertically-align-with-div
+.recipe-title {
+  transform: rotate(180deg);
+  writing-mode: vertical-lr;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: "Lato";
+  font-size: 1.563rem;
+  font-weight: $dark-weight;
+  letter-spacing: 5px;
+  line-height: 33px;
+
+  margin-bottom: 2.188rem;
+}
+
+.overview,
+.ingredients,
+.instructions {
+  margin-bottom: 3.625rem;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.875rem;
+}
+
+//https://stackoverflow.com/questions/20642827/how-do-i-get-the-numbers-of-an-ordered-list-to-align-underneath-a-div-heading
+.instruction-list {
+  padding: 0;
+  list-style-position: inside;
+}
+
+@media only screen and (min-width: $breakpoint-md) {
+  //extra aligned here but not on other screen sizes
+  //not sure I get why have this difference
+  .ingredients,
+  .instructions,
+  button {
+    margin-left: calc(1.688rem + 0.625rem);
+  }
+}
+
+@media only screen and (max-width: $breakpoint-md) {
+  .recipe-header {
+    img {
+      width: 100%;
+    }
+  }
+}
+@media screen and (min-width: $breakpoint-lg) {
+  .top {
+    display: flex;
+    gap: 2.813rem;
+    height: 492px;
+    margin-bottom: 3.625rem;
+
+    .overview {
+      height: 100%;
+    }
+  }
+}

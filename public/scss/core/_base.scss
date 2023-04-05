@@ -1,0 +1,45 @@
+//footer sticky via flex method
+//https://css-tricks.com/couple-takes-sticky-footer/
+
+body {
+  // font-family: $body-font-family;
+  /* base font size */
+  font-size: 1rem;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: $dark;
+  text-decoration: none;
+}
+
+.content {
+  margin: 0 auto;
+  width: 80%;
+  height: 70%;
+}
+
+// https://generatepress.com/forums/topic/how-can-i-draw-a-partial-line-under-text/
+.underline:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: $dark;
+}
+
+.section-title {
+  font-family: "Lato";
+  font-weight: $dark-weight;
+  font-size: 1.563rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}

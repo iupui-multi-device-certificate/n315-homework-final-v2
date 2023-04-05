@@ -1,0 +1,75 @@
+footer {
+  z-index: 1030;
+
+  margin-top: 9rem;
+
+  //https://stackoverflow.com/questions/27351467/full-screen-picture-background-room-for-footer
+  //see Harshul Pandav
+  //have to set width for position fixed to work
+  width: 100%;
+
+  font-family: "Lato";
+  font-size: 0.938rem;
+  font-style: italic;
+  color: $dark;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 2.5rem 1.625rem 2.5rem;
+
+  a {
+    font-family: "Lato";
+  }
+}
+
+.copyright {
+  font-size: $font-size--15;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+.social {
+  display: flex;
+  gap: 40.4px;
+}
+
+@media only screen and (max-width: $breakpoint-lg) {
+  footer {
+    font-size: 0.625rem;
+
+    .copyright,
+    .social {
+      font-size: 0.625rem;
+    }
+  }
+}
+
+@media only screen and (max-width: $breakpoint-sm) {
+  footer {
+    flex-wrap: wrap;
+    // font-size: 0.625rem;
+
+    .copyright,
+    .social {
+      margin-bottom: 20px;
+      // font-size: 0.625rem;
+    }
+    .footer-nav {
+      order: 3;
+    }
+    .footer-nav {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  // .social {
+  //   order: -2;
+  // }
+}

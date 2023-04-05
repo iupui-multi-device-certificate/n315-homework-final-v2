@@ -1,0 +1,89 @@
+.btn {
+  //align text in button w/o changing size of button:
+  // https://stackoverflow.com/questions/13217797/how-to-align-the-text-middle-of-button
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+
+  text-decoration: none;
+
+  color: $dark;
+  cursor: pointer;
+
+  font-family: "Myridad Pro";
+  font-size: 1.563rem;
+  letter-spacing: 12.5px;
+  line-height: 33px;
+
+  &--round {
+    // @extend .btn;
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    color: $light;
+    font-family: "Gill Sans";
+    font-weight: $light-weight;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  &--xsmall {
+    height: 2.5rem;
+    width: 5.5rem;
+    font-size: 0.75rem;
+  }
+  &--small {
+    width: 127.66px;
+    height: 42.01px;
+    white-space: nowrap;
+    font-size: 1.25rem;
+  }
+
+  &--medium {
+    width: 158px;
+    height: 52px;
+  }
+
+  &--wide {
+    width: 100%;
+    height: 52px;
+  }
+
+  &--rose {
+    background-color: $rose;
+  }
+
+  &--naplesYellow {
+    background-color: $naplesYellow;
+  }
+
+  &--file-selector {
+    padding: 0.5rem;
+
+    font-family: "Myridad Pro";
+    font-size: 1rem;
+
+    border: none;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    color: $dark;
+    cursor: pointer;
+    display: inline-block;
+  }
+}
+
+//fix for delete button sizing
+#deleteButton {
+  font-size: 1.188rem;
+  letter-spacing: 1.9px;
+  line-height: 26px;
+}

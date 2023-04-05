@@ -1,0 +1,29 @@
+.section-login {
+  display: flex;
+  gap: 15.625rem;
+
+  //flex has to be on each item
+  //https://css-tricks.com/almanac/properties/f/flex/
+  .login-form {
+    flex: 1 45%;
+  }
+
+  .signup-form {
+    flex: 1 55%;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-md) {
+  .section-login {
+    flex-direction: column;
+    gap: 2rem;
+
+    .login-form {
+      flex: 1 100%;
+    }
+
+    .signup-form {
+      flex: 1 100%;
+    }
+  }
+}

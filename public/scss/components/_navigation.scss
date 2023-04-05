@@ -1,0 +1,98 @@
+.header {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+
+  margin-bottom: $spacing-xl;
+
+  font-family: "Myriad Pro";
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.375rem 3.125rem 0 3.125rem;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  .nav-item,
+  .nav-item .nav-link {
+    font-size: 1.563rem;
+  }
+
+  #userFullName {
+    font-style: italic;
+  }
+}
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: $dark;
+}
+
+// .current-page:after {
+  .nav-link[aria-current="page"]:after {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 3px;
+  background-color: $dark;
+}
+
+//footer shows b/c fixed. not sure how to have both?
+//this is why on mobile, they just switch to footer nav completely
+// @media only screen and (max-width: $breakpoint-md) {
+@media only screen and (max-width: $breakpoint-lg) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+
+    background-color: $watermelon;
+    height: 100vh;
+    width: 100%;
+
+    transition: 0.3s;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}

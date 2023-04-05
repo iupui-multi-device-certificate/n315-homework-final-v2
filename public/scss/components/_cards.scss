@@ -1,0 +1,111 @@
+//NOTE: this is mobile first design
+//NOTE: this is really a recipe card
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 2.5rem;
+}
+
+.card {
+  width: 100%;
+  margin-bottom: 3.125rem;
+}
+
+.image-holder {
+  position: relative;
+  img {
+    min-width: 100%;
+  }
+
+  //https://www.w3schools.com/howto/howto_css_image_text.asp
+  .btn-overlay {
+    //take no chances since button is inline by default
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+}
+
+.card-body {
+  background-color: $light;
+  color: $dark;
+  font-family: "Lato";
+  border-radius: $border-radius-lg;
+
+  margin-bottom: 1.25rem;
+
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.card-title {
+  font-weight: $dark-weight;
+  font-size: 0.938rem;
+}
+
+.card-text {
+  font-size: 0.563rem;
+}
+
+.time,
+.servings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 0.625rem;
+}
+
+.button-holder {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+// @media only screen and (min-width: $breakpoint-md) {
+//portrait tablet per W3 schools https://www.w3schools.com/howto/howto_css_media_query_breakpoints.asp
+@media only screen and (min-width: $breakpoint-tablet-portrait) {
+  .card-row {
+    display: flex;
+  }
+
+  .card {
+    flex: 1 1 30%;
+    max-width: 524px;
+  }
+}
+@media only screen and (min-width: $breakpoint-xl) {
+  .cards {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    flex: 1 0 30%;
+    max-width: 524px;
+  }
+
+  .card-body {
+    min-height: 263px;
+    flex-basis: 224px;
+
+    max-height: 263px;
+    padding: 5%;
+  }
+
+  .button-holder {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+}

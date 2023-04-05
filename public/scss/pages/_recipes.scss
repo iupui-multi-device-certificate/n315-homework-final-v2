@@ -1,0 +1,39 @@
+//https://css-tricks.com/perfect-full-page-background-image/
+//this makes it full page
+//apply on html
+.recipe-hero {
+  background: linear-gradient(
+      rgba($lightTeal, $opacity),
+      rgba($lightTeal, $opacity)
+    ),
+    url("../images/recipes/recipe-hero.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.browse-recipes {
+  .btn {
+    display: none;
+  }
+
+  .btn-overlay {
+    display: none;
+  }
+}
+
+//TODO: maybe display should be flex-start regardless
+.your-recipes {
+  .cards {
+    justify-content: flex-start;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-lg) {
+  .your-recipes {
+    .cards {
+      justify-content: center;
+    }
+  }
+}

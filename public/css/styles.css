@@ -1,14 +1,783 @@
+/* reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  font-weight: normal;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  background-color: transparent;
+}
+
+fieldset {
+  border: 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.bg-naplesYellow {
+  background-color: #ffd972;
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("fonts/Caveat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Caveat";
+  src: url("fonts/Caveat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Myriad Pro";
+  src: url("fonts/MyriadPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Myriad Pro";
+  src: url("fonts/MyriadPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gill Sans";
+  src: url("fonts/GillSans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gill Sans";
+  src: url("fonts/GillSans-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gill Sans";
+  src: url("fonts/GillSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("fonts/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("fonts/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("fonts/Lato-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("fonts/Lato-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+body {
+  /* base font size */
+  font-size: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #393939;
+  text-decoration: none;
+}
+
+.content {
+  margin: 0 auto;
+  width: 80%;
+  height: 70%;
+}
+
+.underline:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #393939;
+}
+
+.section-title {
+  font-family: "Lato";
+  font-weight: 900;
+  font-size: 1.563rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero {
+  background-image: linear-gradient(rgba(242, 92, 84, 0.6), rgba(242, 92, 84, 0.6)), url("../images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #393939;
+}
+.hero .hero-cta {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.hero .hero-cta .large-circle {
+  background-color: #ffd972;
+  border-radius: 50%;
+  width: 22.349rem;
+  height: 22.349rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero .hero-cta .large-circle .hero-title {
+  font-size: 1.5rem;
+  font-family: "Myridad Pro";
+  margin-bottom: 1.875rem;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  line-height: 32px;
+  margin-bottom: 2rem;
+}
+.hero .hero-cta .large-circle .hero-subtitle {
+  font-size: 0.813rem;
+  font-family: "Lato";
+  letter-spacing: 1.3px;
+  line-height: 16px;
+  width: 45%;
+}
+.hero .hero-cta .small-circle {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -35%;
+  width: 10.493rem;
+  height: 10.493rem;
+  background-color: #fcbcb8;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero .hero-cta .small-circle .hero-callout {
+  width: 63%;
+  font-family: "Lato";
+  font-size: 0.625rem;
+  letter-spacing: 1px;
+  line-height: 12px;
+  font-style: italic;
+}
+
+@media only screen and (max-width: 768px) {
+  .hero .hero-cta .large-circle {
+    width: 16.113rem;
+    height: 16.113rem;
+  }
+  .hero .hero-cta .small-circle {
+    width: 7.565rem;
+    height: 7.565rem;
+    top: -20%;
+    right: -20%;
+  }
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 1.625rem;
+  box-shadow: 0px 0.625rem 0.375rem rgba(57, 57, 57, 0.16);
+  text-decoration: none;
+  color: #393939;
+  cursor: pointer;
+  font-family: "Myridad Pro";
+  font-size: 1.563rem;
+  letter-spacing: 12.5px;
+  line-height: 33px;
+}
+.btn--round {
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  color: #ffffff;
+  font-family: "Gill Sans";
+  font-weight: 300;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.btn--xsmall {
+  height: 2.5rem;
+  width: 5.5rem;
+  font-size: 0.75rem;
+}
+.btn--small {
+  width: 127.66px;
+  height: 42.01px;
+  white-space: nowrap;
+  font-size: 1.25rem;
+}
+.btn--medium {
+  width: 158px;
+  height: 52px;
+}
+.btn--wide {
+  width: 100%;
+  height: 52px;
+}
+.btn--rose {
+  background-color: #efa7a7;
+}
+.btn--naplesYellow {
+  background-color: #ffd972;
+}
+.btn--file-selector {
+  padding: 0.5rem;
+  font-family: "Myridad Pro";
+  font-size: 1rem;
+  border: none;
+  border-radius: 1.625rem;
+  box-shadow: 0px 0.625rem 0.375rem rgba(57, 57, 57, 0.16);
+  text-decoration: none;
+  white-space: nowrap;
+  color: #393939;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#deleteButton {
+  font-size: 1.188rem;
+  letter-spacing: 1.9px;
+  line-height: 26px;
+}
+
+.form-element {
+  border: none;
+  border-bottom: 3px solid #393939;
+  padding: 0 0 6.5px 0;
+  margin-bottom: 5rem;
+  width: 100%;
+  font-family: "Lato";
+  font-weight: 300;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  line-height: 27px;
+}
+.form-element--small {
+  font-size: 0.75rem;
+  margin-bottom: 3.125rem;
+}
+
+::-moz-placeholder {
+  opacity: 1; /* Firefox */
+}
+
+::placeholder {
+  opacity: 1; /* Firefox */
+}
+
+[type=file] {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.file-input {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid #393939;
+  padding: 0 0 6.5px 0;
+  margin-bottom: 5rem;
+  width: 100%;
+  font-family: "Lato";
+  font-weight: 300;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  line-height: 27px;
+}
+
+.form-element:focus,
+.file-input:hover {
+  background-color: rgba(239, 167, 167, 0.3);
+}
+
+.last-row {
+  position: relative;
+}
+
+.btn--add {
+  position: absolute;
+  top: -6px;
+  right: 0;
+}
+
+legend {
+  font-family: "Lato";
+  font-weight: 900;
+  font-size: 1.875rem;
+  margin-bottom: 2rem;
+}
+
+#login-form .form-title,
+#signup-form .form-title {
+  font-family: "Lato";
+  font-weight: 900;
+  font-size: 1.875rem;
+  letter-spacing: 3px;
+  line-height: 40px;
+}
+#login-form .form-subtitle,
+#signup-form .form-subtitle {
+  font-family: "Lato";
+  font-style: italic;
+  font-size: 0.75rem;
+  letter-spacing: 1.2px;
+  line-height: 15px;
+}
+
+.form-title {
+  color: #393939;
+  font-size: 1.563rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+  .form-element,
+  .file-input {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .btn,
+  .form-element,
+  .file-input {
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .btn,
+  .form-element,
+  .file-input {
+    font-size: 0.75rem;
+  }
+}
+.header {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  margin-bottom: 2rem;
+  font-family: "Myriad Pro";
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  gap: 3rem;
-  width: 80%;
-  margin: 0 auto;
+  padding: 2.375rem 3.125rem 0 3.125rem;
 }
 
-main {
-  width: 75%;
-  margin: 0 auto;
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-menu .nav-item,
+.nav-menu .nav-item .nav-link {
+  font-size: 1.563rem;
+}
+.nav-menu #userFullName {
+  font-style: italic;
+}
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #393939;
+}
+
+.nav-link[aria-current=page]:after {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 3px;
+  background-color: #393939;
+}
+
+@media only screen and (max-width: 992px) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: #f25c54;
+    height: 100vh;
+    width: 100%;
+    transition: 0.3s;
+  }
+  .nav-menu.active {
+    left: 0;
+  }
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+footer {
+  z-index: 1030;
+  margin-top: 9rem;
+  width: 100%;
+  font-family: "Lato";
+  font-size: 0.938rem;
+  font-style: italic;
+  color: #393939;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem 1.625rem 2.5rem;
+}
+footer a {
+  font-family: "Lato";
+}
+
+.copyright {
+  font-size: 15px;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.social {
+  display: flex;
+  gap: 40.4px;
+}
+
+@media only screen and (max-width: 992px) {
+  footer {
+    font-size: 0.625rem;
+  }
+  footer .copyright,
+  footer .social {
+    font-size: 0.625rem;
+  }
+}
+@media only screen and (max-width: 576px) {
+  footer {
+    flex-wrap: wrap;
+  }
+  footer .copyright,
+  footer .social {
+    margin-bottom: 20px;
+  }
+  footer .footer-nav {
+    order: 3;
+  }
+  footer .footer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.card {
+  width: 100%;
+  margin-bottom: 3.125rem;
+}
+
+.image-holder {
+  position: relative;
+}
+.image-holder img {
+  min-width: 100%;
+}
+.image-holder .btn-overlay {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.card-body {
+  background-color: #ffffff;
+  color: #393939;
+  font-family: "Lato";
+  border-radius: 1.875rem;
+  margin-bottom: 1.25rem;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.card-title {
+  font-weight: 900;
+  font-size: 0.938rem;
+}
+
+.card-text {
+  font-size: 0.563rem;
+}
+
+.time,
+.servings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 0.625rem;
+}
+
+.button-holder {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .card-row {
+    display: flex;
+  }
+  .card {
+    flex: 1 1 30%;
+    max-width: 524px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .cards {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .card {
+    flex: 1 0 30%;
+    max-width: 524px;
+  }
+  .card-body {
+    min-height: 263px;
+    flex-basis: 224px;
+    max-height: 263px;
+    padding: 5%;
+  }
+  .button-holder {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+}
+.section-login {
+  display: flex;
+  gap: 15.625rem;
+}
+.section-login .login-form {
+  flex: 1 45%;
+}
+.section-login .signup-form {
+  flex: 1 55%;
+}
+
+@media only screen and (max-width: 768px) {
+  .section-login {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .section-login .login-form {
+    flex: 1 100%;
+  }
+  .section-login .signup-form {
+    flex: 1 100%;
+  }
+}
+.recipe-hero {
+  background: linear-gradient(rgba(167, 232, 189, 0.8), rgba(167, 232, 189, 0.8)), url("../images/recipes/recipe-hero.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.browse-recipes .btn {
+  display: none;
+}
+.browse-recipes .btn-overlay {
+  display: none;
+}
+
+.your-recipes .cards {
+  justify-content: flex-start;
+}
+
+@media only screen and (max-width: 992px) {
+  .your-recipes .cards {
+    justify-content: center;
+  }
+}
+.view-recipe {
+  font-family: "Myriad Pro";
+  font-size: 1.25rem;
+  letter-spacing: 4px;
+  line-height: 27px;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.recipe-header {
+  display: flex;
+  gap: 0.625rem;
+  width: 100%;
+}
+
+.recipe-title {
+  transform: rotate(180deg);
+  writing-mode: vertical-lr;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: "Lato";
+  font-size: 1.563rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  line-height: 33px;
+  margin-bottom: 2.188rem;
+}
+
+.overview,
+.ingredients,
+.instructions {
+  margin-bottom: 3.625rem;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.875rem;
+}
+
+.instruction-list {
+  padding: 0;
+  list-style-position: inside;
+}
+
+@media only screen and (min-width: 768px) {
+  .ingredients,
+  .instructions,
+  button {
+    margin-left: 2.313rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .recipe-header img {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .top {
+    display: flex;
+    gap: 2.813rem;
+    height: 492px;
+    margin-bottom: 3.625rem;
+  }
+  .top .overview {
+    height: 100%;
+  }
 }

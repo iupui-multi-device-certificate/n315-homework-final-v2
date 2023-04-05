@@ -1,0 +1,39 @@
+/* reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  font-weight: normal;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+//reset for forms
+//https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  background-color: transparent;
+}
+
+fieldset {
+  border: 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}

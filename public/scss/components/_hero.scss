@@ -1,0 +1,111 @@
+.hero {
+  //this should work for both server & localhost
+  //https://stackoverflow.com/questions/2853308/how-to-make-css-url-background-images-show-up-in-localhost
+  //order matters to get the gradient to show
+
+  //https://stackoverflow.com/questions/2504071/how-do-i-combine-a-background-image-and-css3-gradient-on-the-same-element
+  background-image: linear-gradient(
+      rgba($watermelon, $opacity-light),
+      rgba($watermelon, $opacity-light)
+    ),
+    url("../images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  // height: 100vh;
+  min-height: 100%;
+
+  width: 100%;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: $dark;
+
+  .hero-cta {
+    // margin: 200px 0;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+
+    .large-circle {
+      background-color: $naplesYellow;
+      border-radius: 50%;
+      width: 22.349rem;
+      height: 22.349rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .hero-title {
+        font-size: 1.5rem;
+        font-family: "Myridad Pro";
+        margin-bottom: 1.875rem;
+        font-weight: $bold-weight;
+        letter-spacing: 2.4px;
+        line-height: 32px;
+        margin-bottom: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.813rem;
+        font-family: "Lato";
+        letter-spacing: 1.3px;
+        line-height: 16px;
+        width: 45%;
+      }
+    }
+
+    .small-circle {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: -35%;
+      width: 10.493rem;
+      height: 10.493rem;
+
+      background-color: $teaRose;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .hero-callout {
+        width: 63%;
+        font-family: "Lato";
+        font-size: 0.625rem;
+        letter-spacing: 1px;
+        line-height: 12px;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $breakpoint-md) {
+  .hero {
+    .hero-cta {
+      .large-circle {
+        width: 16.113rem;
+        height: 16.113rem;
+      }
+
+      .small-circle {
+        width: 7.565rem;
+        height: 7.565rem;
+        top: -20%;
+        right: -20%;
+      }
+    }
+  }
+}
