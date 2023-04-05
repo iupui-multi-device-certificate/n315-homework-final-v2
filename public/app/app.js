@@ -11,7 +11,11 @@ import { recipesView } from "./views/recipesView.js";
 import { loginView } from "./views/loginView.js";
 
 //import helpers
-import { toggleCurrentPage, toggleRecipeHero } from "./helpers.js";
+import {
+  toggleCurrentPage,
+  toggleMobileMenu,
+  toggleRecipeHero,
+} from "./helpers.js";
 
 //init the firebase app
 firebase.app();
@@ -49,11 +53,21 @@ const handleLogout = () => {
 
 //add event listener for all buttons
 document.addEventListener("click", ({ target }) => {
+  //TODO: probably don't need button, why does = equal work?
   if (target.matches("button")) {
     //logout
+    //not sure why sure why this works in an if statement condition
     if ((target.id = "#logout")) {
       handleLogout();
     }
+  }
+
+  if (
+    target.classList.contains("hamburger") ||
+    target.classList.contains("bar") ||
+    target.classList.contains("nav-link")
+  ) {
+    toggleMobileMenu();
   }
 });
 

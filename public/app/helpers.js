@@ -29,6 +29,11 @@ export const toggleRecipeHero = (currentPageHash) => {
     );
 };
 
+export const toggleMobileMenu = () => {
+  document.querySelector(".hamburger").classList.toggle("active");
+  document.querySelector(".nav-menu").classList.toggle("active");
+};
+
 //TODO: use the following for the view button on recipes
 // const handleViewButtonClick = (e) => {
 //   const currentId = extractTextByCharacter(e.currentTarget.id, "-");
