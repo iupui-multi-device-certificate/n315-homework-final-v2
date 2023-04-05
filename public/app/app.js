@@ -75,7 +75,7 @@ const setupUI = (currentUser = null) => {
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
 
-  if (currentUser.isLoggedIn) {
+  if (currentUser) {
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = false));
     loggedOutLinks.forEach((item) => (item.hidden = true));
@@ -103,9 +103,11 @@ const onAuthInit = () => {
           return { userId: doc.id, ...data, isLoggedIn: true };
         });
 
+      console.log("on AuthStateChanged > user logged in ", currentUser);
       setupUI(currentUser);
     } else {
       console.log("on AuthStateChanged > user logged out");
+      currentUser = null;
       setupUI(currentUser);
     }
   });

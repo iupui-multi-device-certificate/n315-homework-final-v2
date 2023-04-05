@@ -4,12 +4,12 @@
 
 //on array inputs use name[] to indicate these belong to same array
 
-export const createRecipeView = ({ firstName, isLoggedIn }) => `
+export const createRecipeView = (currentUser) => `
   <section class="content section-recipe-form">
     <form class="recipe-form" id="recipeForm">      
       <h1 class="form-title">${
-        isLoggedIn && firstName != ""
-          ? `${firstName}, create your recipe!`
+        currentUser
+          ? `${currentUser.firstName}, create your recipe!`
           : `Sign in to create a recipe!`
       }</h1>
       <fieldset>
