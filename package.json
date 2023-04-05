@@ -1,0 +1,12 @@
+{
+  "name": "rah-test-firebase-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "firebase serve": "firebase serve --only hosting",
+    "firebase deploy": "firebase deploy --except functions"
+  },
+  "author": "",
+  "license": "ISC"
+}

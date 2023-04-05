@@ -1,0 +1,14 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  gap: 3rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+main {
+  width: 75%;
+  margin: 0 auto;
+}
