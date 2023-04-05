@@ -48,11 +48,11 @@ document.addEventListener("click", ({ target }) => {
   }
 });
 
-const setupUI = (userData = null) => {
-  window.onhashchange = () => render(userData);
-  render(userData);
+const setupUI = (currentUser = null) => {
+  window.onhashchange = () => render(currentUser);
+  render(currentUser);
 
-  if (userData) {
+  if (currentUser.isLoggedIn) {
     document.getElementById("loginNav").hidden = true;
     document.getElementById("logoutNav").hidden = false;
   } else {
@@ -65,6 +65,10 @@ const setupUI = (userData = null) => {
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
     let userDocData = null;
+    let currentUser = {
+      userDocData,
+      isLoggedIn: false,
+    };
     if (user) {
       userDocData = await firebase
         .firestore()
@@ -76,10 +80,15 @@ const onAuthInit = () => {
           return doc.data();
         });
 
-      setupUI(userDocData);
+      //TODO: maybe change to:
+      const currentUser = {
+        userDocData,
+        isLoggedIn: true,
+      };
+      setupUI(currentUser);
     } else {
       console.log("on AuthStateChanged > user logged out");
-      setupUI();
+      setupUI(currentUser);
     }
   });
 };
