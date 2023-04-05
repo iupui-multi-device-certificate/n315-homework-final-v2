@@ -31,7 +31,38 @@ const render = (locals) => {
   const hashTag = path.hash !== "" ? path.hash : "#home";
   const page = locals ? routes[hashTag](locals) : routes[hashTag]();
 
+  //toggle recipe-hero on html since this was only way I could get it full page at this time
+  document
+    .querySelector("html")
+    .classList.toggle(
+      "recipe-hero",
+      hashTag === "#browse" || hashTag === "#yourRecipes"
+    );
+
   document.querySelector("#app").innerHTML = page;
+
+  toggleCurrentPage(hashTag);
+};
+
+//use JS not :active underline is partial & using :after pseudo-selector
+const toggleCurrentPage = (currentPageHash) => {
+  //https://codepen.io/Coding-in-Public/pen/MWroExJ
+  //except also need to remove from rest when change page
+  //get their hash not href (which is the whole link)
+
+  document.querySelectorAll(".nav-menu .nav-link").forEach((navLink) => {
+    //just get the anchor tags
+    if (navLink.tagName === "A") {
+      //use aria-current for accessibility reasons
+
+      //remove aria-current from everywhere first
+      navLink.removeAttribute("aria-current", "page");
+
+      if (navLink.hash === currentPageHash && navLink.hash != "#login") {
+        navLink.setAttribute("aria-current", "page");
+      }
+    }
+  });
 };
 
 const handleLogout = () => {
