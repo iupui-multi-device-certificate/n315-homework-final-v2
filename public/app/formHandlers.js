@@ -53,6 +53,38 @@ const handleLoginSubmit = (e, loginForm) => {
     });
 };
 
+const handleRecipeSubmit = (e, recipeForm) => {
+  e.preventDefault();
+
+  let recipes = [];
+  let ingredients = [];
+  let instructions = [];
+
+  //TODO: instruction needs to include the step number
+  //or set the id??
+  let instruction = {
+    stepNumber: 1,
+    text: "",
+  };
+
+  //keep these outside?
+  ingredients = getValuesFromInputsByName("ingredients[]");
+  instructions = getValuesFromInputsByName("instructions[]");
+
+  let recipe = {
+    imgFullURL: "",
+    imgThumbURL: "",
+    name: recipeForm["recipeName"].value,
+    description: recipeForm["recipeDescription"].value,
+    time: recipeForm["recipeTotalTime"].value,
+    servings: recipeForm["recipeServingSize"].value,
+    ingredients,
+    instructions,
+  };
+
+  console.log("recipe", recipe);
+};
+
 //form event listeners
 //add to document since these are dynamically created.
 export const initFormListeners = () => {
@@ -68,5 +100,17 @@ export const initFormListeners = () => {
     if (loginForm) {
       handleLoginSubmit(e, loginForm);
     }
+
+    if (recipeForm) {
+      handleRecipeSubmit(e, recipeForm);
+    }
   });
+};
+
+const getValuesFromInputsByName = (nameOfList) => {
+  const elementList = document.getElementsByName(nameOfList);
+
+  const valuesArray = Array.from(elementList).map((el) => el.value);
+  console.log("getValuesFromInputsByName > valuesArray", valuesArray);
+  return valuesArray;
 };

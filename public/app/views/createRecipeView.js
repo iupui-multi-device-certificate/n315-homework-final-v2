@@ -1,5 +1,12 @@
-export const createRecipeView = () => `<section class="content section-recipe-form">
-<form class="recipe-form" onsubmit="event.preventDefault();">
+//TODO: maybe add a flag so can toggle edit vs create
+//TODO: dynamically generate ingredient/instruction item w/ button & use button to add new item
+//TODO: clean up ids, etc. that don't need on ingredient/instruction
+
+//on array inputs use name[] to indicate these belong to same array
+
+export const createRecipeView =
+  () => `<section class="content section-recipe-form">
+<form class="recipe-form" id="recipeForm">
   <div class="form-title">Hey Michael, create your recipe!</div>
   <fieldset>
     <div class="file-input">
@@ -12,7 +19,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
         aria-label="recipeImage"
         class="form-element"
       />
-      <!-- better would be to use an picture/paperclip combo icon with alt/tooltip for screen reader. this would translate across screen sizes better -->
+      <!-- better would be to use a picture/paperclip combo icon with alt/tooltip for screen reader. this would translate across screen sizes better -->
       <label for="recipeImage" class="btn btn--file-selector btn--rose"
         >Attach File</label
       >
@@ -58,7 +65,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
     <legend>Enter Ingredients:</legend>
     <input
       type="text"
-      name="ingredient-1"
+      name="ingredients[]"
       id="ingredient-1"
       placeholder="Ingredient #1"
       aria-label="ingredient-1"
@@ -66,7 +73,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
     />
     <input
       type="text"
-      name="ingredient-2"
+      name="ingredients[]"
       id="ingredient-2"
       placeholder="Ingredient #2"
       aria-label="ingredient-2"
@@ -75,7 +82,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
     <div class="last-row">
       <input
         type="text"
-        name="ingredient-3"
+        name="ingredients[]"
         id="ingredient-3"
         placeholder="Ingredient #3"
         aria-label="ingredient-3"
@@ -90,7 +97,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
     <legend>Enter Instructions:</legend>
     <input
       type="text"
-      name="instruction-1"
+      name="instructions[]"
       id="instruction-1"
       placeholder="Instruction #1"
       aria-label="instruction-1"
@@ -98,7 +105,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
     />
     <input
       type="text"
-      name="instruction-2"
+      name="instructions[]"
       id="instruction-2"
       placeholder="Instruction #2"
       aria-label="instruction-2"
@@ -107,7 +114,7 @@ export const createRecipeView = () => `<section class="content section-recipe-fo
     <div class="last-row">
       <input
         type="text"
-        name="instruction-3"
+        name="instructions[]"
         id="instruction-3"
         placeholder="Instruction #3"
         aria-label="instruction-3"
