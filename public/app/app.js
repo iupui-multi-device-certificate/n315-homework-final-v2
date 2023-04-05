@@ -1,3 +1,5 @@
+//TODO: footer nav routing
+
 //NOTE: do not need DOMContentLoaded listener since our scripts at bottom of body tag and use defer and/or module
 
 import { initFormListeners } from "./formHandlers.js";
@@ -83,12 +85,17 @@ const setupUI = (currentUser = null) => {
   window.onhashchange = () => render(currentUser);
   render(currentUser);
 
+  const loggedOutLinks = document.querySelectorAll(".logged-out");
+  const loggedInLinks = document.querySelectorAll(".logged-in");
+
   if (currentUser.isLoggedIn) {
-    document.getElementById("loginNav").hidden = true;
-    document.getElementById("logoutNav").hidden = false;
+    // toggle user UI elements
+    loggedInLinks.forEach((item) => (item.hidden = false));
+    loggedOutLinks.forEach((item) => (item.hidden = true));
   } else {
-    document.getElementById("loginNav").hidden = false;
-    document.getElementById("logoutNav").hidden = true;
+    // toggle user UI elements
+    loggedInLinks.forEach((item) => (item.hidden = true));
+    loggedOutLinks.forEach((item) => (item.hidden = false));
   }
 };
 
@@ -111,7 +118,6 @@ const onAuthInit = () => {
           return doc.data();
         });
 
-      //TODO: maybe change to:
       const currentUser = {
         userDocData,
         isLoggedIn: true,
