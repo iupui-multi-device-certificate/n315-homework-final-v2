@@ -61,7 +61,7 @@ ${recipeItems.map((recipeItem) => renderRecipeItem(recipeItem)).join("")}
 //destructure
 
 //TODO: check if user logged in but no recipes and add button to create recipess
-export const recipesView = ({ firstName, isLoggedIn }) => `
+export const recipesView = ({ firstName, isLoggedIn, recipes }) => `
 <section class="content section-recipes ${
   isLoggedIn ? `your-recipes` : `browse-recipes`
 }">
