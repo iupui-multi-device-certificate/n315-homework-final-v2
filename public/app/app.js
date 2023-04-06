@@ -75,7 +75,11 @@ const setupUI = (currentUser = null) => {
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
   const loggedInButtons = document.querySelectorAll(".btn--logged-in");
-  const attachFileLabel = document.getElementById("attachFile");
+
+  //TODO: if time, also dim the attach file label - timing issue due to when rendered
+  //NOTE: better design would be to hide the create recipes page altogether when not logged in
+
+  // const attachFileLabel = document.getElementById("attachFile");
 
   if (currentUser) {
     // toggle user UI elements
@@ -84,14 +88,14 @@ const setupUI = (currentUser = null) => {
 
     loggedInButtons.forEach((item) => (item.disabled = false));
 
-    attachFileLabel.classList.remove("disabled");
+    // attachFileLabel.classList.remove("disabled");
   } else {
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = true));
     loggedOutLinks.forEach((item) => (item.hidden = false));
 
     loggedInButtons.forEach((item) => (item.disabled = true));
-    attachFileLabel.classList.add("disabled");
+    // attachFileLabel.classList.add("disabled");
   }
 };
 
