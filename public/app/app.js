@@ -67,10 +67,10 @@ document.addEventListener("click", ({ target }) => {
 });
 
 const setupUI = (currentUser = null) => {
+  initFormListeners(currentUser);
+
   window.onhashchange = () => render(currentUser);
   render(currentUser);
-
-  initFormListeners(currentUser);
 
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
