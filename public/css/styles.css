@@ -312,6 +312,15 @@ a {
   line-height: 26px;
 }
 
+.disabled,
+button:disabled,
+button[disabled],
+input[type=submit]:disabled,
+input[type=submit][disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .form-element {
   border: none;
   border-bottom: 3px solid #393939;

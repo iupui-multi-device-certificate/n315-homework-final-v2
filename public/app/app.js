@@ -74,15 +74,24 @@ const setupUI = (currentUser = null) => {
 
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
+  const loggedInButtons = document.querySelectorAll(".btn--logged-in");
+  const attachFileLabel = document.getElementById("attachFile");
 
   if (currentUser) {
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = false));
     loggedOutLinks.forEach((item) => (item.hidden = true));
+
+    loggedInButtons.forEach((item) => (item.disabled = false));
+
+    attachFileLabel.classList.remove("disabled");
   } else {
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = true));
     loggedOutLinks.forEach((item) => (item.hidden = false));
+
+    loggedInButtons.forEach((item) => (item.disabled = true));
+    attachFileLabel.classList.add("disabled");
   }
 };
 

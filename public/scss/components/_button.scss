@@ -87,3 +87,13 @@
   letter-spacing: 1.9px;
   line-height: 26px;
 }
+
+//disabled
+.disabled,
+button:disabled,
+button[disabled],
+input[type="submit"]:disabled,
+input[type="submit"][disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

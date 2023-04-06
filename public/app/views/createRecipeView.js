@@ -24,7 +24,7 @@ export const createRecipeView = (currentUser) => `
             class="form-element"
           />
           <!-- better would be to use a picture/paperclip combo icon with alt/tooltip for screen reader. this would translate across screen sizes better -->
-          <label for="recipeImage" class="btn btn--file-selector btn--rose"
+          <label for="recipeImage" class="btn btn--file-selector btn--rose" id="attachFile"
             >Attach File</label
           >
         </div>
@@ -92,7 +92,7 @@ export const createRecipeView = (currentUser) => `
             aria-label="ingredient-3"
             class="form-element"
           />
-          <button class="btn--round btn--rose btn--add" id="addIngredient">
+          <button class="btn--round btn--rose btn--add btn--logged-in" id="addIngredient"">
             +
           </a>
         </div>
@@ -124,7 +124,7 @@ export const createRecipeView = (currentUser) => `
             aria-label="instruction-3"
             class="form-element"
           />
-          <button class="btn--round btn--rose btn--add" id="addInstruction">
+          <button class="btn--round btn--rose btn--add btn--logged-in" id="addInstruction">
             +
           </a>
         </div>
@@ -132,7 +132,7 @@ export const createRecipeView = (currentUser) => `
       <input
         type="submit"
         value="Create Recipe"
-        class="btn btn--wide btn--rose"
+        class="btn btn--wide btn--rose btn--disabled btn--logged-in"
         name="createRecipe"
         id="createRecipe"
       />
