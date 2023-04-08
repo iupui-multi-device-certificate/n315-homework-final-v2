@@ -735,7 +735,10 @@ footer a {
 .recipe-header {
   display: flex;
   gap: 0.625rem;
-  width: 100%;
+}
+.recipe-header img {
+  max-width: 100%;
+  height: 421px;
 }
 
 .recipe-title {
@@ -771,19 +774,21 @@ footer a {
   list-style-position: inside;
 }
 
-@media only screen and (max-width: 768px) {
-  .recipe-header img {
-    width: 100%;
-  }
-}
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .top {
     display: flex;
     gap: 2.813rem;
     height: 492px;
     margin-bottom: 3.625rem;
+    width: 100%;
   }
   .top .overview {
     height: 100%;
+    flex-grow: 1;
+  }
+  .ingredients,
+  .instructions,
+  #editButton {
+    margin-left: 2.313rem;
   }
 }

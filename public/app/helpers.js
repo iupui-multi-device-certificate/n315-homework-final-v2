@@ -57,6 +57,8 @@ export const itemClickHandler = (itemID, view, items) => {
   console.log("itemClickHandler > requestedItem", requestedItem);
   const itemPage = view(requestedItem);
 
+  //toogle the recipe hero off
+  document.querySelector("html").classList.remove("recipe-hero");
   document.getElementById("app").innerHTML = itemPage;
 };
 
