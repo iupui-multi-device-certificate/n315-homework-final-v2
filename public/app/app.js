@@ -9,13 +9,15 @@ import { browseView } from "./views/browseView.js";
 import { createRecipeView } from "./views/createRecipeView.js";
 import { recipesView } from "./views/recipesView.js";
 import { loginView } from "./views/loginView.js";
+import { recipeDetailView } from "./views/recipeDetailView.js";
 
 //import helpers
 import {
   toggleCurrentPage,
   toggleMobileMenu,
   toggleRecipeHero,
-  uploadImage,
+  itemClickHandler,
+  extractTextByCharacter,
 } from "./helpers.js";
 
 //init the firebase app
@@ -53,7 +55,12 @@ const handleLogout = () => {
   firebase.auth().signOut();
 };
 
-//add click listners
+const handleViewButtonClick = (target, currentUser) => {
+  const currentId = extractTextByCharacter(target.id, "-");
+  itemClickHandler(currentId, recipeDetailView, currentUser.recipes);
+};
+
+//add generic click listners
 document.addEventListener("click", ({ target }) => {
   if (target.id === "#logout") {
     handleLogout();
@@ -66,9 +73,15 @@ document.addEventListener("click", ({ target }) => {
   ) {
     toggleMobileMenu();
   }
+
+  // if (target.classList.contains("btn--view")) {
+  //   console.log(target);
+  //   handleViewButtonClick(target);
+  // }
 });
 
 const setupUI = (currentUser = null) => {
+  //maybe this should be after have user
   initFormListeners(currentUser);
 
   window.onhashchange = () => render(currentUser);
@@ -91,6 +104,14 @@ const setupUI = (currentUser = null) => {
     loggedInButtons.forEach((item) => (item.disabled = false));
 
     // attachFileLabel.classList.remove("disabled");
+
+    //add detail page listener after have a user
+    document.addEventListener("click", ({ target }) => {
+      if (target.classList.contains("btn--view")) {
+        // console.log(target);
+        handleViewButtonClick(target, currentUser);
+      }
+    });
   } else {
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = true));
@@ -103,6 +124,7 @@ const setupUI = (currentUser = null) => {
   }
 };
 
+//TODO: move this up
 document.addEventListener("change", ({ target }) => {
   if (target.id === "recipeImage") {
     console.log(target.files[0]);

@@ -46,12 +46,18 @@ export const extractTextByCharacter = (string, character) => {
 
 // see N315 HW06 for usage example
 // click handler to get detail of item, e.g. blog & gallery items
+//since we're only getting recipes make this more specific
 export const itemClickHandler = (itemID, view, items) => {
-  const getItem = (itemID) => items.find((item) => itemID == item.id);
+  console.log("itemClickHandler > items", items);
+  // console.log("itemClickHandler > itemId", itemID);
+
+  const getItem = (itemID) => items.find((item) => itemID == item.recipeId);
   const requestedItem = getItem(itemID);
+
+  console.log("itemClickHandler > requestedItem", requestedItem);
   const itemPage = view(requestedItem);
 
-  $("#app").html(itemPage);
+  document.getElementById("app").innerHTML = itemPage;
 };
 
 /* 
