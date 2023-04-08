@@ -23,8 +23,8 @@
   }
 }
 
-//TODO: maybe display should be flex-start regardless
-.your-recipes {
+.your-recipes,
+.browse-recipes {
   .cards {
     justify-content: flex-start;
   }

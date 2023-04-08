@@ -22,9 +22,6 @@ import {
 
 //init the firebase app
 const app = firebase.app();
-// const storage = firebase.storage();
-
-// initFormListeners();
 
 //? maybe move render & handleLogout to separate file?
 //just provide name of view to map to route, render will actually call the function
@@ -36,7 +33,6 @@ const routes = {
   "#login": loginView,
 };
 
-//why am i sending path when it's a global already?
 const render = (locals) => {
   console.log("render > window.location", window.location);
   const path = window.location;
@@ -73,11 +69,15 @@ document.addEventListener("click", ({ target }) => {
   ) {
     toggleMobileMenu();
   }
+});
 
-  // if (target.classList.contains("btn--view")) {
-  //   console.log(target);
-  //   handleViewButtonClick(target);
-  // }
+document.addEventListener("change", ({ target }) => {
+  if (target.id === "recipeImage") {
+    console.log(target.files[0]);
+    if (target.files[0]) {
+      document.getElementById("imgUploadText").innerHTML = target.files[0].name;
+    }
+  }
 });
 
 const setupUI = (currentUser = null) => {
@@ -108,7 +108,7 @@ const setupUI = (currentUser = null) => {
     //add detail page listener after have a user
     document.addEventListener("click", ({ target }) => {
       if (target.classList.contains("btn--view")) {
-        // console.log(target);
+ 
         handleViewButtonClick(target, currentUser);
       }
     });
@@ -123,16 +123,6 @@ const setupUI = (currentUser = null) => {
     //TODO: redirect user to home
   }
 };
-
-//TODO: move this up
-document.addEventListener("change", ({ target }) => {
-  if (target.id === "recipeImage") {
-    console.log(target.files[0]);
-    if (target.files[0]) {
-      document.getElementById("imgUploadText").innerHTML = target.files[0].name;
-    }
-  }
-});
 
 // listen for auth status changes
 const onAuthInit = () => {
@@ -164,8 +154,7 @@ const onAuthInit = () => {
         .then((querySnapshot) => {
           const recipes = [];
           querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log("recipe collection", doc.id, " => ", doc.data());
+ 
             recipes.push({ recipeId: doc.id, ...doc.data() });
           });
           return recipes;

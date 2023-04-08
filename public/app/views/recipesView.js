@@ -59,10 +59,6 @@ const renderRecipeItems = (recipeItems) => `
 ${recipeItems.map((recipeItem) => renderRecipeItem(recipeItem)).join("")}
 `;
 
-//destructure
-
-//TODO: check if user logged in but no recipes and add button to create recipess
-// export const recipesView = ({ firstName, isLoggedIn, recipes }) => `
 //TODO: fix - check for which view (yourRecipes vs. browseRecipes", not logged in
 export const recipesView = (currentUser) => `
 <section class="content section-recipes ${

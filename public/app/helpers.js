@@ -1,4 +1,4 @@
-//use JS not :active underline is partial & using :after pseudo-selector
+//use JS not :active b/c underline is partial
 export const toggleCurrentPage = (currentPageHash) => {
   //https://codepen.io/Coding-in-Public/pen/MWroExJ
   //except also need to remove from rest when change page
@@ -33,12 +33,6 @@ export const toggleMobileMenu = () => {
   document.querySelector(".hamburger").classList.toggle("active");
   document.querySelector(".nav-menu").classList.toggle("active");
 };
-
-//TODO: use the following for the view button on recipes
-// const handleViewButtonClick = (e) => {
-//   const currentId = extractTextByCharacter(e.currentTarget.id, "-");
-//   itemClickHandler(currentId, recipeDetailView, testRecipes);
-// };
 
 export const extractTextByCharacter = (string, character) => {
   return string.substring(string.indexOf(character) + 1);
@@ -85,9 +79,7 @@ export const uploadImage = (imageUpload, userId, recipeId) => {
 
   const storageRef = firebase.storage().ref();
 
-  // Upload file and metadata to the object 'images/mountains.jpg'
-  // var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
-  var uploadTask = storageRef
+   var uploadTask = storageRef
     .child("images/" + imageName)
     .put(imageUpload, metadata);
 
