@@ -1,3 +1,5 @@
+import { uploadImage } from "./helpers.js";
+
 const handleSignupSubmit = (e, signupForm) => {
   e.preventDefault();
 
@@ -18,7 +20,7 @@ const handleSignupSubmit = (e, signupForm) => {
           firstName,
           lastName,
           email,
-          recipes: [],
+          // recipes: [],
         });
       }
     })
@@ -53,10 +55,11 @@ const handleLoginSubmit = (e, loginForm) => {
     });
 };
 
-const handleRecipeSubmit = (e, recipeForm, { recipes, userId }) => {
-  //TODO: upload images - need find a tutorial
-  //https://firebase.google.com/docs/storage/web/upload-files
+const handleRecipeSubmit = (e, recipeForm, currentUser) => {
   e.preventDefault();
+
+  //don't destructure since recipes could be null
+  const userId = currentUser.userId;
 
   // let recipes = [];
   let ingredients = [];
@@ -73,9 +76,11 @@ const handleRecipeSubmit = (e, recipeForm, { recipes, userId }) => {
   ingredients = getValuesFromInputsByName("ingredients[]");
   instructions = getValuesFromInputsByName("instructions[]");
 
+  let imageToUpload = document.getElementById("recipeImage").files[0];
+
+  //TODO: update text on file input div to show image attached or name of file?
+
   let recipe = {
-    imgFullURL: "",
-    imgThumbURL: "",
     name: recipeForm["recipeName"].value,
     description: recipeForm["recipeDescription"].value,
     time: recipeForm["recipeTotalTime"].value,
@@ -84,14 +89,18 @@ const handleRecipeSubmit = (e, recipeForm, { recipes, userId }) => {
     instructions,
   };
 
-  //probably need to use this for inner recipes.ingredients, etc when edit
-  //https://firebase.google.com/docs/firestore/manage-data/add-data#update_elements_in_an_array
-  //make this its own function?
+  //works, you have to drill down in firebase to actually see it
+  //use add to get the docid back
+  //https://stackoverflow.com/questions/48740430/firestore-how-to-get-document-id-after-adding-a-document-to-a-collection
   firebase
     .firestore()
     .collection("Users")
     .doc(userId)
-    .update({ recipes: firebase.firestore.FieldValue.arrayUnion(recipe) });
+    .collection("Recipes")
+    .add(recipe)
+    .then((docRef) => {
+      uploadImage(imageToUpload, userId, docRef.id);
+    });
 
   console.log("recipe created");
 

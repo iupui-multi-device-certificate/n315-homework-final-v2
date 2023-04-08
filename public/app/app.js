@@ -15,10 +15,12 @@ import {
   toggleCurrentPage,
   toggleMobileMenu,
   toggleRecipeHero,
+  uploadImage,
 } from "./helpers.js";
 
 //init the firebase app
-firebase.app();
+const app = firebase.app();
+// const storage = firebase.storage();
 
 // initFormListeners();
 
@@ -96,6 +98,8 @@ const setupUI = (currentUser = null) => {
 
     loggedInButtons.forEach((item) => (item.disabled = true));
     // attachFileLabel.classList.add("disabled");
+
+    //TODO: redirect user to home
   }
 };
 

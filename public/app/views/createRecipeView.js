@@ -22,6 +22,7 @@ export const createRecipeView = (currentUser) => `
             id="recipeImage"
             aria-label="recipeImage"
             class="form-element"
+            accept="image/jpeg, image/png, image/jpg"
           />
           <!-- better would be to use a picture/paperclip combo icon with alt/tooltip for screen reader. this would translate across screen sizes better -->
           <label for="recipeImage" class="btn btn--file-selector btn--rose" id="attachFile"
