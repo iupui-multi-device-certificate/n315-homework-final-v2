@@ -107,6 +107,7 @@ const setupUI = (currentUser = null) => {
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
     let currentUser = null;
+    let userRecipes = null;
 
     //TODO: use onsnapshot to have the listener for when changes?
     if (user) {
@@ -120,7 +121,28 @@ const onAuthInit = () => {
           return { userId: doc.id, ...data, isLoggedIn: true };
         });
 
+      //https://stackoverflow.com/questions/52100103/getting-all-documents-from-one-collection-in-firestore
+      //See Imanullah solution
+      //might be a way to chain this with above, but this works for now
+      userRecipes = await firebase
+        .firestore()
+        .collection("Users")
+        .doc(user.uid)
+        .collection("Recipes")
+        .get()
+        .then((querySnapshot) => {
+          const recipes = [];
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log("recipe collection", doc.id, " => ", doc.data());
+            recipes.push({ recipeId: doc.id, ...doc.data() });
+          });
+          return recipes;
+        });
+
+      currentUser.recipes = userRecipes;
       console.log("on AuthStateChanged > user logged in ", currentUser);
+
       setupUI(currentUser);
     } else {
       console.log("on AuthStateChanged > user logged out");
