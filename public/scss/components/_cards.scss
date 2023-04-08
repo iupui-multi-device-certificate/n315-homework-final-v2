@@ -1,6 +1,5 @@
 //NOTE: this is mobile first design
 //NOTE: this is really a recipe card
-//TODO: fix mobile views
 
 .cards {
   display: flex;
@@ -17,13 +16,13 @@
 
 .image-holder {
   position: relative;
-  width: 300px;
-  height: 236px;
+
+  width: 100%;
+  height: auto;
+
   img {
     border-radius: 24px;
     min-width: 100%;
-    // width: 300px;
-    // height: 236px;
   }
 
   //https://www.w3schools.com/howto/howto_css_image_text.asp
@@ -90,17 +89,12 @@
     flex: 1 1 30%;
     max-width: 524px;
   }
-}
-@media only screen and (min-width: $breakpoint-xl) {
-  .cards {
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
 
-  .card {
-    flex: 1 0 30%;
-    max-width: 524px;
+  .image-holder {
+    img {
+      width: 300px;
+      height: 263px;
+    }
   }
 
   .card-body {
@@ -114,5 +108,17 @@
   .button-holder {
     justify-content: flex-start;
     gap: 1rem;
+  }
+}
+@media only screen and (min-width: $breakpoint-xl) {
+  .cards {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    flex: 1 0 30%;
+    max-width: 524px;
   }
 }
