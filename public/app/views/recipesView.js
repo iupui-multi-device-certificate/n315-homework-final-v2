@@ -16,7 +16,7 @@ const renderRecipeItem = (recipeItem) => `
       <div class="btn-overlay ">
         <button
           class="btn btn--small btn--naplesYellow btn--view"
-          id="view-${recipeItem.id}"
+          id="view-${recipeItem.recipeId}"
         >
           View
         </button>
