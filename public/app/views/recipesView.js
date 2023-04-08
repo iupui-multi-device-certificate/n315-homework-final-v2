@@ -2,14 +2,15 @@
 //https://www.webaxe.org/proper-use-buttons-links/
 //https://a11y-101.com/design/button-vs-link
 
-//TODO: fix CSS - buttons are moved to the right :(
+const dummyImgUrl =
+  "https://dummyimage.com/300x263/fcbcb8/393939.png&text=No+Image";
 
 const renderRecipeItem = (recipeItem) => `
 <div class="card">
   <div class="card-row">
     <div class="image-holder">
       <img
-        src=${recipeItem.imgThumbURL}
+        src=${recipeItem.imgUrl != "" ? recipeItem.imgUrl : dummyImgUrl}
         alt="${recipeItem.name}"
       />
 

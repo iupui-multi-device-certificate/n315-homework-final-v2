@@ -16,8 +16,13 @@
 
 .image-holder {
   position: relative;
+  width: 300px;
+  height: 236px;
   img {
+    border-radius: 24px;
     min-width: 100%;
+    // width: 300px;
+    // height: 236px;
   }
 
   //https://www.w3schools.com/howto/howto_css_image_text.asp
@@ -70,6 +75,7 @@
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
+  padding: 0 0.7rem 0 0.7rem;
 }
 
 // @media only screen and (min-width: $breakpoint-md) {

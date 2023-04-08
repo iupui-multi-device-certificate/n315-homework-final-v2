@@ -53,15 +53,16 @@
   list-style-position: inside;
 }
 
-@media only screen and (min-width: $breakpoint-md) {
-  //extra aligned here but not on other screen sizes
-  //not sure I get why have this difference
-  .ingredients,
-  .instructions,
-  button {
-    margin-left: calc(1.688rem + 0.625rem);
-  }
-}
+//TODO: fix & be specific - messing up the other buttons
+// @media only screen and (min-width: $breakpoint-md) {
+//   //extra aligned here but not on other screen sizes
+//   //not sure I get why have this difference
+//   .ingredients,
+//   .instructions,
+//   button {
+//     margin-left: calc(1.688rem + 0.625rem);
+//   }
+// }
 
 @media only screen and (max-width: $breakpoint-md) {
   .recipe-header {

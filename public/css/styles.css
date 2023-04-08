@@ -594,8 +594,11 @@ footer a {
 
 .image-holder {
   position: relative;
+  width: 300px;
+  height: 236px;
 }
 .image-holder img {
+  border-radius: 24px;
   min-width: 100%;
 }
 .image-holder .btn-overlay {
@@ -643,6 +646,7 @@ footer a {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
+  padding: 0 0.7rem 0 0.7rem;
 }
 
 @media only screen and (min-width: 600px) {
@@ -767,13 +771,6 @@ footer a {
   list-style-position: inside;
 }
 
-@media only screen and (min-width: 768px) {
-  .ingredients,
-  .instructions,
-  button {
-    margin-left: 2.313rem;
-  }
-}
 @media only screen and (max-width: 768px) {
   .recipe-header img {
     width: 100%;
