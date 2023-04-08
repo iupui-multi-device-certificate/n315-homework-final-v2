@@ -78,9 +78,8 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
 
   let imageToUpload = document.getElementById("recipeImage").files[0];
 
-  //TODO: update text on file input div to show image attached or name of file?
-
   let recipe = {
+    imgUrl: "",
     name: recipeForm["recipeName"].value,
     description: recipeForm["recipeDescription"].value,
     time: recipeForm["recipeTotalTime"].value,
@@ -105,6 +104,8 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
   console.log("recipe created");
 
   recipeForm.reset();
+  //set the image upload text back
+  document.getElementById("imgUploadText").innerHTML = "Add Recipe Image";
 };
 
 //form event listeners

@@ -15,7 +15,7 @@ export const createRecipeView = (currentUser) => `
       <fieldset>
         <div class="file-input">
           <!-- extra div to get a custom placeholder since can't replace button text -->
-          <div>Add Recipe Image</div>
+          <div id="imgUploadText">Add Recipe Image</div>
           <input
             type="file"
             name="recipeImage"

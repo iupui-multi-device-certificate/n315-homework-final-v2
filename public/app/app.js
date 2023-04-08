@@ -103,6 +103,15 @@ const setupUI = (currentUser = null) => {
   }
 };
 
+document.addEventListener("change", ({ target }) => {
+  if (target.id === "recipeImage") {
+    console.log(target.files[0]);
+    if (target.files[0]) {
+      document.getElementById("imgUploadText").innerHTML = target.files[0].name;
+    }
+  }
+});
+
 // listen for auth status changes
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
