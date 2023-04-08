@@ -41,13 +41,13 @@ const renderRecipeItem = (recipeItem) => `
 
   <div class="button-holder">
     <button
-      class="btn btn--small btn--naplesYellow"
-      id="editButton"
+      class="btn btn--small btn--naplesYellow btn--edit"
+      id="editButton-${recipeItem.recipeId}"
       >Edit
     </button>
     <button
-      class="btn btn--small btn--naplesYellow"
-      id="deleteButton"
+      class="btn btn--small btn--naplesYellow btn--delete"
+      id="deleteButton-${recipeItem.recipeId}"
       >Delete
     </button>
   </div>

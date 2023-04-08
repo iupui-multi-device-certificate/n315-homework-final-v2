@@ -306,7 +306,14 @@ a {
   display: inline-block;
 }
 
-#deleteButton {
+.btn--view,
+.btn--edit {
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  line-height: 27px;
+}
+
+.btn--delete {
   font-size: 1.188rem;
   letter-spacing: 1.9px;
   line-height: 26px;
