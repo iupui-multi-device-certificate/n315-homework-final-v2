@@ -20,6 +20,9 @@ import {
   extractTextByCharacter,
 } from "./helpers.js";
 
+//import user feedback messags
+import { MESSAGES } from "./messages.js";
+
 //init the firebase app
 const app = firebase.app();
 
@@ -49,6 +52,7 @@ const render = (locals) => {
 
 const handleLogout = () => {
   firebase.auth().signOut();
+  alert(MESSAGES.INFO_LOGOUT);
 };
 
 const handleViewButtonClick = (target, currentUser) => {
@@ -108,7 +112,6 @@ const setupUI = (currentUser = null) => {
     //add detail page listener after have a user
     document.addEventListener("click", ({ target }) => {
       if (target.classList.contains("btn--view")) {
- 
         handleViewButtonClick(target, currentUser);
       }
     });
@@ -145,6 +148,9 @@ const onAuthInit = () => {
       //https://stackoverflow.com/questions/52100103/getting-all-documents-from-one-collection-in-firestore
       //See Imanullah solution
       //might be a way to chain this with above, but this works for now
+      // TODO: maybe use onSnapshot instead of get so these are more live??
+      //https://stackoverflow.com/questions/52309507/firestore-onsnapshot-does-it-work-for-subcollections
+      //https://firebase.google.com/docs/firestore/query-data/listen
       userRecipes = await firebase
         .firestore()
         .collection("Users")
@@ -154,7 +160,6 @@ const onAuthInit = () => {
         .then((querySnapshot) => {
           const recipes = [];
           querySnapshot.forEach((doc) => {
- 
             recipes.push({ recipeId: doc.id, ...doc.data() });
           });
           return recipes;
@@ -166,6 +171,7 @@ const onAuthInit = () => {
       setupUI(currentUser);
     } else {
       console.log("on AuthStateChanged > user logged out");
+
       currentUser = null;
       setupUI(currentUser);
     }

@@ -1,4 +1,5 @@
 import { uploadImage } from "./helpers.js";
+import { MESSAGES } from "./messages.js";
 
 const handleSignupSubmit = (e, signupForm) => {
   e.preventDefault();
@@ -20,14 +21,30 @@ const handleSignupSubmit = (e, signupForm) => {
           firstName,
           lastName,
           email,
-          // recipes: [],
         });
       }
+      alert(MESSAGES.SUCCESS_ACCOUNT_CREATED);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("Error creating account", errorMessage);
+
+      let userErrorMessage = "";
+
+      switch (errorCode) {
+        case "auth/email-already-in-use":
+          userErrorMessage = MESSAGES.ERROR_EMAIL_EXISTS;
+          break;
+        case "auth/weak-password":
+          userErrorMessage = MESSAGES.ERROR_WEAK_PASSWORD;
+          break;
+        default:
+          userErrorMessage = MESSAGES.ERROR_SIGNUP_GENERAL;
+          break;
+      }
+
+      alert(userErrorMessage);
     })
     //clear form at end regardless
     .then(() => {
@@ -46,12 +63,32 @@ const handleLoginSubmit = (e, loginForm) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-      loginForm.reset();
+      alert(MESSAGES.SUCCESS_LOGIN);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log("Error logging in", errorMessage);
+
+      let userErrorMessage = "";
+
+      switch (errorCode) {
+        case "auth/wrong-password":
+          userErrorMessage = MESSAGES.ERROR_WRONG_PASSWORD;
+          break;
+        case "auth/too-many-requests":
+          userErrorMessage = MESSAGES.ERROR_TOO_MANY_ATTEMPTS;
+          break;
+        default:
+          userErrorMessage = MESSAGES.ERROR_LOGIN_GENERAL;
+          break;
+      }
+
+      alert(userErrorMessage);
+    })
+    //clear form at end regardless
+    .then(() => {
+      loginForm.reset();
     });
 };
 
