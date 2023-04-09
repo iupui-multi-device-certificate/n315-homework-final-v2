@@ -67,16 +67,23 @@ $margin-bottom-large: 5rem;
   background-color: rgba($rose, 0.3);
 }
 
-.last-row {
+.recipe-list-item {
   position: relative;
 }
 
 .btn--add {
   // margin-bottom: 6px;
+  display: block;
   position: absolute;
   top: -6px;
   right: 0;
 }
+
+.ingredientsList > .recipe-list-item:not(:last-child) .btn--add,
+.instructionsList > .recipe-list-item:not(:last-child) .btn--add {
+  display: none;
+}
+
 legend {
   font-family: "Lato";
   font-weight: $dark-weight;

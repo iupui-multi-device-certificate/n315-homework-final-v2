@@ -386,14 +386,20 @@ input[type=submit][disabled] {
   background-color: rgba(239, 167, 167, 0.3);
 }
 
-.last-row {
+.recipe-list-item {
   position: relative;
 }
 
 .btn--add {
+  display: block;
   position: absolute;
   top: -6px;
   right: 0;
+}
+
+.ingredientsList > .recipe-list-item:not(:last-child) .btn--add,
+.instructionsList > .recipe-list-item:not(:last-child) .btn--add {
+  display: none;
 }
 
 legend {

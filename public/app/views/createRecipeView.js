@@ -3,6 +3,33 @@
 //TODO: clean up ids, etc. that don't need on ingredient/instruction
 
 //on array inputs use name[] to indicate these belong to same array
+//TODO: make this the div w/ the button
+export const renderListItem = (itemType, placeHolderText, index) => `
+  <div class="recipe-list-item">
+    <input
+      type="text"
+      name="${itemType}[]"
+      id="${itemType}-${index}"
+      placeholder="${placeHolderText} #${index}"
+      aria-label="${itemType}-${index}"
+      class="form-element "
+    />
+    <button class="btn--round btn--rose btn--add btn--logged-in" >
+      +
+    </button>
+  </div>
+`;
+
+//https://stackoverflow.com/questions/59716109/render-a-react-component-n-times
+// https://stackoverflow.com/questions/34189370/how-to-repeat-an-element-n-times-using-jsx-and-lodash
+//use underscore not e like in https://www.carlrippon.com/repeat-element-n-times-in-jsx/
+const n = 3;
+const renderListItems = (itemType, placeHolderText) => `
+
+  ${[...Array(n)]
+    .map((_, i) => renderListItem(itemType, placeHolderText, i + 1))
+    .join("")}
+`;
 
 export const createRecipeView = (currentUser) => `
   <section class="content section-recipe-form">
@@ -67,69 +94,13 @@ export const createRecipeView = (currentUser) => `
           class="form-element"
         />
       </fieldset>
-      <fieldset>
+      <fieldset class="ingredientsList">
         <legend>Enter Ingredients:</legend>
-        <input
-          type="text"
-          name="ingredients[]"
-          id="ingredient-1"
-          placeholder="Ingredient #1"
-          aria-label="ingredient-1"
-          class="form-element"
-        />
-        <input
-          type="text"
-          name="ingredients[]"
-          id="ingredient-2"
-          placeholder="Ingredient #2"
-          aria-label="ingredient-2"
-          class="form-element"
-        />
-        <div class="last-row">
-          <input
-            type="text"
-            name="ingredients[]"
-            id="ingredient-3"
-            placeholder="Ingredient #3"
-            aria-label="ingredient-3"
-            class="form-element"
-          />
-          <button class="btn--round btn--rose btn--add btn--logged-in" id="addIngredient"">
-            +
-          </a>
-        </div>
+        ${renderListItems("ingredient", "Ingredient")}
       </fieldset>
-      <fieldset>
+      <fieldset class="instructionsList">
         <legend>Enter Instructions:</legend>
-        <input
-          type="text"
-          name="instructions[]"
-          id="instruction-1"
-          placeholder="Instruction #1"
-          aria-label="instruction-1"
-          class="form-element"
-        />
-        <input
-          type="text"
-          name="instructions[]"
-          id="instruction-2"
-          placeholder="Instruction #2"
-          aria-label="instruction-2"
-          class="form-element"
-        />
-        <div class="last-row">
-          <input
-            type="text"
-            name="instructions[]"
-            id="instruction-3"
-            placeholder="Instruction #3"
-            aria-label="instruction-3"
-            class="form-element"
-          />
-          <button class="btn--round btn--rose btn--add btn--logged-in" id="addInstruction">
-            +
-          </a>
-        </div>
+        ${renderListItems("instruction", "Instructions")}
       </fieldset>
       <input
         type="submit"
