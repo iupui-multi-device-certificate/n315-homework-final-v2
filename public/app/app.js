@@ -90,20 +90,22 @@ document.addEventListener("click", ({ target }) => {
 document.addEventListener("change", ({ target }) => {
   if (target.id === "recipeImage") {
     //check correct image format
+    //https://www.geeksforgeeks.org/file-type-validation-while-uploading-it-using-javascript/#
+    // https://dev.to/faddalibrahim/filtering-and-validating-file-uploads-with-javascript-327p
+
     const fileInput = target.files[0];
-    const imgType = fileInput.type;
-    if (target.files[0]) {
-      if (
-        imgType !== "image/jpg" ||
-        imgType !== "image/jpeg" ||
-        imgType !== "image/png"
-      ) {
-        alert(MESSAGES.ERROR_IMG_FILE_TYPE);
-        fileInput.value = "";
-        return false;
-      }
-      document.getElementById("imgUploadText").innerHTML = target.files[0].name;
+
+    const allowedExtensions = ["jpg", "jpeg", "png"];
+    const { name: fileName } = fileInput;
+    const fileExtension = fileName.split(".").pop();
+    if (!allowedExtensions.includes(fileExtension)) {
+      alert(MESSAGES.ERROR_IMG_FILE_TYPE);
+      fileInput.value = null;
+      //this ensures the text restores back to "Add Recipe Image"
+      return false;
     }
+
+    document.getElementById("imgUploadText").innerHTML = target.files[0].name;
   }
 });
 
@@ -141,7 +143,7 @@ const setupUI = (currentUser = null) => {
     loggedOutLinks.forEach((item) => (item.hidden = false));
 
     loggedInButtons.forEach((item) => (item.disabled = true));
-    
+
     redirectPage();
   }
 };
