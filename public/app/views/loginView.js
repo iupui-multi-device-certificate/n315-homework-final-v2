@@ -59,6 +59,7 @@ export const loginView = () => `<section class="content section-login">
     placeholder="Password"
     aria-label="signup-password"
     class="form-element form-element--small"
+    minlength="6"
   />
   <input
     type="submit"
