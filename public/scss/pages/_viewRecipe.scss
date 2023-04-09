@@ -1,3 +1,4 @@
+//TODO: fix image squish
 .view-recipe {
   font-family: "Myriad Pro";
   font-size: 1.25rem;
@@ -7,6 +8,10 @@
   height: fit-content;
 }
 
+.close-holder {
+  display: flex;
+  justify-content: flex-end;
+}
 .recipe-header {
   display: flex;
   gap: 0.625rem;

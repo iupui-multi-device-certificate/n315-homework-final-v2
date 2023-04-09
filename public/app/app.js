@@ -81,6 +81,10 @@ document.addEventListener("click", ({ target }) => {
     const newItem = renderListItem(splitId[0], newId);
     target.parentElement.insertAdjacentHTML("afterend", newItem);
   }
+
+  if (target.classList.contains("btn--close")) {
+    window.location.reload();
+  }
 });
 
 document.addEventListener("change", ({ target }) => {
