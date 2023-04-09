@@ -6,7 +6,7 @@
 import { initFormListeners } from "./formHandlers.js";
 import { homeView } from "./views/homeView.js";
 import { browseView } from "./views/browseView.js";
-import { createRecipeView } from "./views/createRecipeView.js";
+import { createRecipeView, renderListItem } from "./views/createRecipeView.js";
 import { recipesView } from "./views/recipesView.js";
 import { loginView } from "./views/loginView.js";
 import { recipeDetailView } from "./views/recipeDetailView.js";
@@ -17,7 +17,7 @@ import {
   toggleMobileMenu,
   toggleRecipeHero,
   itemClickHandler,
-  extractTextByCharacter,
+  getTextAfterCharacter,
   redirectPage,
 } from "./helpers.js";
 
@@ -56,7 +56,7 @@ const handleLogout = () => {
 };
 
 const handleViewButtonClick = (target, currentUser) => {
-  const currentId = extractTextByCharacter(target.id, "-");
+  const currentId = getTextAfterCharacter(target.id, "-");
   itemClickHandler(currentId, recipeDetailView, currentUser.recipes);
 };
 
@@ -72,6 +72,14 @@ document.addEventListener("click", ({ target }) => {
     target.classList.contains("nav-link")
   ) {
     toggleMobileMenu();
+  }
+
+  if (target.classList.contains("btn--add")) {
+    const splitId = target.parentElement.id.split("-");
+    const newId = parseInt(splitId[1]) + 1;
+    console.log("new id", newId);
+    const newItem = renderListItem(splitId[0], newId);
+    target.parentElement.insertAdjacentHTML("afterend", newItem);
   }
 });
 

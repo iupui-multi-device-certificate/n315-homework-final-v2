@@ -1,20 +1,23 @@
 //TODO: maybe add a flag so can toggle edit vs create
 //TODO: dynamically generate ingredient/instruction item w/ button & use button to add new item
-//TODO: clean up ids, etc. that don't need on ingredient/instruction
 
 //on array inputs use name[] to indicate these belong to same array
-//TODO: make this the div w/ the button
-export const renderListItem = (itemType, placeHolderText, index) => `
-  <div class="recipe-list-item">
+
+//set type as button to prevent it from submitting form
+// https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms
+export const renderListItem = (itemType, index) => `
+  <div class="recipe-list-item" id="${itemType}-${index}">
     <input
       type="text"
       name="${itemType}[]"
-      id="${itemType}-${index}"
-      placeholder="${placeHolderText} #${index}"
-      aria-label="${itemType}-${index}"
+      id="input-${itemType}-${index}"
+      placeholder="${
+        itemType.charAt(0).toUpperCase() + itemType.slice(1)
+      } #${index}"
+      aria-label="input-${itemType}-${index}"
       class="form-element "
     />
-    <button class="btn--round btn--rose btn--add btn--logged-in" >
+    <button type="button" class="btn--round btn--rose btn--add btn--logged-in" >
       +
     </button>
   </div>
@@ -24,11 +27,9 @@ export const renderListItem = (itemType, placeHolderText, index) => `
 // https://stackoverflow.com/questions/34189370/how-to-repeat-an-element-n-times-using-jsx-and-lodash
 //use underscore not e like in https://www.carlrippon.com/repeat-element-n-times-in-jsx/
 const n = 3;
-const renderListItems = (itemType, placeHolderText) => `
+const renderListItems = (itemType) => `
 
-  ${[...Array(n)]
-    .map((_, i) => renderListItem(itemType, placeHolderText, i + 1))
-    .join("")}
+  ${[...Array(n)].map((_, i) => renderListItem(itemType, i + 1)).join("")}
 `;
 
 export const createRecipeView = (currentUser) => `
@@ -96,11 +97,11 @@ export const createRecipeView = (currentUser) => `
       </fieldset>
       <fieldset class="ingredientsList">
         <legend>Enter Ingredients:</legend>
-        ${renderListItems("ingredient", "Ingredient")}
+        ${renderListItems("ingredient")}
       </fieldset>
       <fieldset class="instructionsList">
         <legend>Enter Instructions:</legend>
-        ${renderListItems("instruction", "Instructions")}
+        ${renderListItems("instruction")}
       </fieldset>
       <input
         type="submit"
