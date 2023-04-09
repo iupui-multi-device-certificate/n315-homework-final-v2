@@ -1,5 +1,4 @@
 //TODO: maybe add a flag so can toggle edit vs create
-//TODO: dynamically generate ingredient/instruction item w/ button & use button to add new item
 
 //on array inputs use name[] to indicate these belong to same array
 

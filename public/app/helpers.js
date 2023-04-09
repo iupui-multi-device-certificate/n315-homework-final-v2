@@ -42,13 +42,9 @@ export const getTextAfterCharacter = (string, character) => {
 // click handler to get detail of item, e.g. blog & gallery items
 //since we're only getting recipes make this more specific
 export const itemClickHandler = (itemID, view, items) => {
-  console.log("itemClickHandler > items", items);
-  // console.log("itemClickHandler > itemId", itemID);
-
   const getItem = (itemID) => items.find((item) => itemID == item.recipeId);
   const requestedItem = getItem(itemID);
 
-  console.log("itemClickHandler > requestedItem", requestedItem);
   const itemPage = view(requestedItem);
 
   //toogle the recipe hero off

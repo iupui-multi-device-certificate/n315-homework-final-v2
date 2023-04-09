@@ -106,13 +106,6 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
   let ingredients = [];
   let instructions = [];
 
-  //TODO: instruction needs to include the step number
-  //or set the id??
-  let instruction = {
-    stepNumber: 1,
-    text: "",
-  };
-
   //keep these outside?
   ingredients = getValuesFromInputsByName("ingredients[]");
   instructions = getValuesFromInputsByName("instructions[]");

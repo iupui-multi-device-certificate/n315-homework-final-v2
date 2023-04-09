@@ -1,5 +1,3 @@
-//TODO: need back/close button or fix routing so back works
-
 const renderListItem = (listItem) => `
   <li>${listItem}</li>
 `;
