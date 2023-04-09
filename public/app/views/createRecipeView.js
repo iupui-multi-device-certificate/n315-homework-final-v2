@@ -34,9 +34,10 @@ export const createRecipeView = (currentUser) => `
           type="text"
           name="recipeName"
           id="recipeName"
-          placeholder="Recipe Name"
+          placeholder="Recipe Name (required)"
           aria-label="recipeName"
           class="form-element"
+          required
         />
 
         <input

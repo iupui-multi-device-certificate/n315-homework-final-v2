@@ -64,7 +64,6 @@ export const itemClickHandler = (itemID, view, items) => {
   https://github.com/machadop1407/firebase-file-upload/blob/main/src/App.js
 */
 
-//TODO: error handling - message about image type accepted
 export const uploadImage = (imageUpload, userId, recipeId) => {
   if (imageUpload == null) {
     console.log("no image selected");
@@ -79,7 +78,7 @@ export const uploadImage = (imageUpload, userId, recipeId) => {
 
   const storageRef = firebase.storage().ref();
 
-   var uploadTask = storageRef
+  var uploadTask = storageRef
     .child("images/" + imageName)
     .put(imageUpload, metadata);
 

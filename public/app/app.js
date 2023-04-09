@@ -77,8 +77,19 @@ document.addEventListener("click", ({ target }) => {
 
 document.addEventListener("change", ({ target }) => {
   if (target.id === "recipeImage") {
-    console.log(target.files[0]);
+    //check correct image format
+    const fileInput = target.files[0];
+    const imgType = fileInput.type;
     if (target.files[0]) {
+      if (
+        imgType !== "image/jpg" ||
+        imgType !== "image/jpeg" ||
+        imgType !== "image/png"
+      ) {
+        alert(MESSAGES.ERROR_IMG_FILE_TYPE);
+        fileInput.value = "";
+        return false;
+      }
       document.getElementById("imgUploadText").innerHTML = target.files[0].name;
     }
   }

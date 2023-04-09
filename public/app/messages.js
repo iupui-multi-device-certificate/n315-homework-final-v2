@@ -12,4 +12,6 @@ export const MESSAGES = {
   SUCCESS_LOGIN: "Login successful",
   SUCCESS_ACCOUNT_CREATED: "Account created.",
   INFO_LOGOUT: "Logout successful.",
+  ERROR_IMG_FILE_TYPE:
+    "Please upload file having extensions .jpeg/.jpg/.png/ only.",
 };
