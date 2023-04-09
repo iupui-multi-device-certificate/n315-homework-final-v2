@@ -1,6 +1,8 @@
+//NOTE: don't use redirect page from form - looks like logged user out
+
 import { uploadImage } from "./helpers.js";
 import { MESSAGES } from "./messages.js";
-import { redirectPage } from "./helpers.js";
+// import { redirectPage } from "./helpers.js";
 
 const handleSignupSubmit = (e, signupForm) => {
   e.preventDefault();
@@ -51,7 +53,7 @@ const handleSignupSubmit = (e, signupForm) => {
     .then(() => {
       signupForm.reset();
       alert(MESSAGES.SUCCESS_ACCOUNT_CREATED);
-      redirectPage("#yourRecipes");
+      // redirectPage("#yourRecipes");
     });
 };
 
@@ -92,7 +94,7 @@ const handleLoginSubmit = (e, loginForm) => {
     //clear form at end regardless
     .then(() => {
       loginForm.reset();
-      redirectPage("#yourRecipes");
+      // redirectPage("#yourRecipes");
     });
 };
 
