@@ -145,6 +145,7 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
   console.log("recipe created");
 
   recipeForm.reset();
+  alert(MESSAGES.SUCCESS_RECIPE_CREATED);
   //set the image upload text back
   document.getElementById("imgUploadText").innerHTML = "Add Recipe Image";
 };
