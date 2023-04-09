@@ -1,5 +1,6 @@
 import { uploadImage } from "./helpers.js";
 import { MESSAGES } from "./messages.js";
+import { redirectPage } from "./helpers.js";
 
 const handleSignupSubmit = (e, signupForm) => {
   e.preventDefault();
@@ -16,7 +17,7 @@ const handleSignupSubmit = (e, signupForm) => {
     .then((cred) => {
       const user = cred.user;
       if (user) {
-        console.log("account created", cred.user);
+        console.log("account created");
         return firebase.firestore().collection("Users").doc(cred.user.uid).set({
           firstName,
           lastName,
@@ -49,6 +50,8 @@ const handleSignupSubmit = (e, signupForm) => {
     //clear form at end regardless
     .then(() => {
       signupForm.reset();
+      alert(MESSAGES.SUCCESS_ACCOUNT_CREATED);
+      redirectPage("#yourRecipes");
     });
 };
 
@@ -89,6 +92,7 @@ const handleLoginSubmit = (e, loginForm) => {
     //clear form at end regardless
     .then(() => {
       loginForm.reset();
+      redirectPage("#yourRecipes");
     });
 };
 

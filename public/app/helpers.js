@@ -131,3 +131,7 @@ export const uploadImage = (imageUpload, userId, recipeId) => {
     }
   );
 };
+
+export const redirectPage = (pageHash = "#home") => {
+  window.location.assign(window.location.origin + `/${pageHash}`);
+};

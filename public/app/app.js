@@ -18,6 +18,7 @@ import {
   toggleRecipeHero,
   itemClickHandler,
   extractTextByCharacter,
+  redirectPage,
 } from "./helpers.js";
 
 //import user feedback messags
@@ -133,7 +134,7 @@ const setupUI = (currentUser = null) => {
     loggedInButtons.forEach((item) => (item.disabled = true));
     // attachFileLabel.classList.add("disabled");
 
-    //TODO: redirect user to home
+    redirectPage();
   }
 };
 
