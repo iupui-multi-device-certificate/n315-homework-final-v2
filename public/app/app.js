@@ -37,7 +37,6 @@ const routes = {
 };
 
 const render = (locals) => {
-  console.log("render > window.location", window.location);
   const path = window.location;
 
   //check not empty string
