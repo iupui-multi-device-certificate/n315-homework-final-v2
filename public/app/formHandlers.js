@@ -99,7 +99,7 @@ const handleLoginSubmit = (e, loginForm) => {
 };
 
 //TODO: ing & inst not saving??
-const handleRecipeSubmit = (e, recipeForm, currentUser) => {
+const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
   e.preventDefault();
 
   //don't destructure since recipes could be null
@@ -114,9 +114,11 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
   instructions = getValuesFromInputsByName("instructions[]");
 
   let imageToUpload = document.getElementById("recipeImage").files[0];
+  const imgUrl = await uploadImage(imageToUpload);
+  //check if empty url in case had issue
 
   let recipe = {
-    imgUrl: "",
+    imgUrl: imgUrl ? imgUrl : "",
     name: recipeForm["recipeName"].value,
     description: recipeForm["recipeDescription"].value,
     time: recipeForm["recipeTotalTime"].value,
@@ -125,18 +127,14 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
     instructions,
   };
 
-  //works, you have to drill down in firebase to actually see it
-  //use add to get the docid back
-  //https://stackoverflow.com/questions/48740430/firestore-how-to-get-document-id-after-adding-a-document-to-a-collection
+  console.log("handle recipe > recipe w/ url", recipe);
+
   firebase
     .firestore()
     .collection("Users")
     .doc(userId)
     .collection("Recipes")
-    .add(recipe)
-    .then((docRef) => {
-      uploadImage(imageToUpload, userId, docRef.id);
-    });
+    .add(recipe);
 
   console.log("recipe created");
 

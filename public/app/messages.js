@@ -15,5 +15,7 @@ export const MESSAGES = {
   INFO_LOGOUT: "Logout successful.",
   ERROR_IMG_FILE_TYPE:
     "Please upload file having extensions .jpeg/.jpg/.png/ only.",
+  ERROR_IMG_UPLOAD:
+    "Image upload failed. Contact your admin for further assistance",
   SUCCESS_RECIPE_CREATED: "Recipe created.",
 };

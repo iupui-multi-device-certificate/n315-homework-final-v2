@@ -188,29 +188,66 @@ const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
     let allRecipes = [];
 
-    if (user) {
-      await firebase
-        .firestore()
-        .collectionGroup("Recipes")
-        .onSnapshot((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
+    let counter = 1;
+    await firebase
+      .firestore()
+      .collectionGroup("Recipes")
+      .onSnapshot((snapshot) => {
+        if (counter === 1) {
+          //initial load
+          snapshot.forEach((doc) => {
             const docRef = doc.ref;
             const parentCollectionRef = docRef.parent;
-
-            //setting up more like a SQL db w/ a foreign key (lol)
             allRecipes.push({
               ownerId: parentCollectionRef.parent.id,
               recipeId: doc.id,
               ...doc.data(),
             });
-            return allRecipes;
+          });
+          counter++;
+        } else {
+          //check type of change and just push changed doc
+          snapshot.docChanges().forEach((change) => {
+            const docRef = change.doc.ref;
+            const parentCollectionRef = docRef.parent;
+            const recipeId = change.doc.id;
+            const data = change.doc.data();
+
+            if (change.type === "added") {
+              console.log("Recipe: ", change.doc.data());
+              allRecipes.push({
+                ownerId: parentCollectionRef.parent.id,
+                recipeId,
+                ...data,
+              });
+            }
+            if (change.type === "modified") {
+              console.log("Recipe: ", change.doc.data());
+            }
+            if (change.type === "removed") {
+              console.log("Recipe: ", change.doc.data());
+            }
           });
 
-          // console.log("allRecipes > allRecipes", allRecipes);
+          counter++;
+        }
 
-          setupUI(user, allRecipes);
-        });
+        //   //setting up more like a SQL db w/ a foreign key (lol)
+        //   allRecipes.push({
+        //     ownerId: parentCollectionRef.parent.id,
+        //     recipeId: doc.id,
+        //     ...doc.data(),
+        //   });
+        //   return allRecipes;
+        // });
 
+        // console.log("allRecipes > allRecipes", allRecipes);
+
+        // setupUI(user, allRecipes);
+      });
+
+    if (user) {
+      setupUI(user, allRecipes);
       console.log("on AuthStateChanged > user logged in ");
     } else {
       setupUI(null, allRecipes);
