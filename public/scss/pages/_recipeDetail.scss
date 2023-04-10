@@ -1,0 +1,110 @@
+//mobile first design
+//per check w/ Visibug 27px;
+$verticalTitleWidth: 1.688rem;
+$recipeHeaderGap: 0.625rem;
+$totalTitleWidth: calc(1.688rem + 0.625rem);
+
+.view-recipe {
+  font-family: "Myriad Pro";
+  font-size: 1.25rem;
+  letter-spacing: 4px;
+  line-height: 27px;
+
+  height: fit-content;
+}
+
+.close-holder {
+  display: flex;
+  justify-content: flex-end;
+}
+
+// https://every-layout.dev/layouts/sidebar/
+.recipe-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $recipeHeaderGap;
+  max-width: 100%;
+}
+
+//rotate per Darryl Johnson w/o need for CSS Grid
+//https://stackoverflow.com/questions/20880244/rotate-text-90deg-and-vertically-align-with-div
+//aligned left (bottom) in mobile, center larger
+.recipe-title {
+  transform: rotate(180deg);
+  writing-mode: vertical-lr;
+  text-align: left;
+
+  flex-basis: $totalTitleWidth;
+  flex-grow: 1;
+}
+
+//need holder so can apply flex basis & grow (not work img)
+.detail-image-holder {
+  flex-basis: 0;
+  flex-grow: 999;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 1.875rem;
+}
+
+.recipe-header,
+.overview,
+.ingredients,
+.instructions {
+  margin-bottom: 3.625rem;
+}
+
+.overview,
+.ingredients,
+.instructions {
+  padding-left: 8px;
+}
+
+.subtitle {
+  font-family: "Lato";
+  font-size: 1.563rem;
+  font-weight: $dark-weight;
+  letter-spacing: 5px;
+  line-height: 33px;
+
+  margin-bottom: 2.188rem;
+}
+
+//https://stackoverflow.com/questions/20642827/how-do-i-get-the-numbers-of-an-ordered-list-to-align-underneath-a-div-heading
+.instruction-list {
+  padding: 0;
+  list-style-position: inside;
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .top {
+    display: flex;
+    gap: 2.813rem;
+  }
+
+  .recipe-title {
+    text-align: center;
+  }
+
+  .recipe-header {
+    height: 421px;
+  }
+  .detail-image-holder {
+    width: 468px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

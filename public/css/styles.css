@@ -782,17 +782,46 @@ footer a {
 
 .recipe-header {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.625rem;
-}
-.recipe-header img {
   max-width: 100%;
-  height: 421px;
 }
 
 .recipe-title {
   transform: rotate(180deg);
   writing-mode: vertical-lr;
-  text-align: center;
+  text-align: left;
+  flex-basis: 2.313rem;
+  flex-grow: 1;
+}
+
+.detail-image-holder {
+  flex-basis: 0;
+  flex-grow: 999;
+}
+.detail-image-holder img {
+  width: 100%;
+  height: 100%;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.875rem;
+}
+
+.recipe-header,
+.overview,
+.ingredients,
+.instructions {
+  margin-bottom: 3.625rem;
+}
+
+.overview,
+.ingredients,
+.instructions {
+  padding-left: 8px;
 }
 
 .subtitle {
@@ -804,19 +833,6 @@ footer a {
   margin-bottom: 2.188rem;
 }
 
-.overview,
-.ingredients,
-.instructions {
-  margin-bottom: 3.625rem;
-}
-
-.overview {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.875rem;
-}
-
 .instruction-list {
   padding: 0;
   list-style-position: inside;
@@ -826,17 +842,18 @@ footer a {
   .top {
     display: flex;
     gap: 2.813rem;
-    height: 492px;
-    margin-bottom: 3.625rem;
+  }
+  .recipe-title {
+    text-align: center;
+  }
+  .recipe-header {
+    height: 421px;
+  }
+  .detail-image-holder {
+    width: 468px;
+  }
+  .detail-image-holder img {
     width: 100%;
-  }
-  .top .overview {
     height: 100%;
-    flex-grow: 1;
-  }
-  .ingredients,
-  .instructions,
-  #editButton {
-    margin-left: 2.313rem;
   }
 }

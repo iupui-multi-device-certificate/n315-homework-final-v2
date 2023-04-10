@@ -1,4 +1,5 @@
 //TODO: maybe add a flag so can toggle edit vs create
+//TODO: recipeDescription - make textarea with character limit so fits detail page
 
 //on array inputs use name[] to indicate these belong to same array
 
@@ -66,7 +67,7 @@ export const createRecipeView = ({currentUser}) => `
           class="form-element"
           required
         />
-
+        
         <input
           type="text"
           name="recipeDescription"

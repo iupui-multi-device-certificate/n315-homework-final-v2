@@ -13,11 +13,13 @@ export const recipeDetailView = (recipe) => `
     <div class="top">
       <header class="recipe-header">
         <h1 class="recipe-title">${recipe.name}</h1>
-        <img src="${recipe.imgUrl}" alt="" />
+        <div class="detail-image-holder">
+          <img src="${recipe.imgUrl}" alt="" />
+        </div>
       </header>
       <section class="overview">
         <h2 class="subtitle">Description:</h2>
-        <p>
+        <p class="recipe-description">
           ${recipe.description}
         </p>
         <p>Total Time:</p>

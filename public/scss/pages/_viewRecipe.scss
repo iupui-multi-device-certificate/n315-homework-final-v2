@@ -1,4 +1,9 @@
 //TODO: fix image squish
+.close-holder {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .view-recipe {
   font-family: "Myriad Pro";
   font-size: 1.25rem;
@@ -8,17 +13,28 @@
   height: fit-content;
 }
 
-.close-holder {
+.top {
+  // min-width: 100%;
+  background-color: purple;
+  flex-grow: 1;
+}
+.overview {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  // flex-grow: 1;
+  // min-width: 100%;
+  // background-color: aqua;
+  // gap: 1.875rem;
 }
 .recipe-header {
   display: flex;
   gap: 0.625rem;
+  // background-color: pink;
 
   img {
     max-width: 100%;
-    height: 421px;
+    // height: auto;
   }
 }
 
@@ -37,20 +53,20 @@
   letter-spacing: 5px;
   line-height: 33px;
 
-  margin-bottom: 2.188rem;
+  // margin-bottom: 2.188rem;
+}
+
+//ensures description doesn't get too big when displaying
+.recipe-description {
+  // background-color: aquamarine;
+  max-height: 106px;
+  overflow: hidden;
 }
 
 .overview,
 .ingredients,
 .instructions {
   margin-bottom: 3.625rem;
-}
-
-.overview {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.875rem;
 }
 
 //https://stackoverflow.com/questions/20642827/how-do-i-get-the-numbers-of-an-ordered-list-to-align-underneath-a-div-heading
@@ -63,13 +79,19 @@
   .top {
     display: flex;
     gap: 2.813rem;
-    height: 492px;
+    height: 421px;
     margin-bottom: 3.625rem;
     width: 100%;
-
     .overview {
       height: 100%;
       flex-grow: 1;
+    }
+  }
+
+  .recipe-header {
+    img {
+      width: 468px;
+      height: 421px;
     }
   }
 
