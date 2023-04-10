@@ -31,7 +31,7 @@ const renderListItems = (itemType) => `
   ${[...Array(n)].map((_, i) => renderListItem(itemType, i + 1)).join("")}
 `;
 
-export const createRecipeView = (currentUser) => `
+export const createRecipeView = ({currentUser}) => `
   <section class="content section-recipe-form">
     <form class="recipe-form" id="recipeForm">      
       <h1 class="form-title">${
