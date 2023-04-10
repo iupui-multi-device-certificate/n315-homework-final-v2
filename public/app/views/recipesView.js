@@ -59,26 +59,29 @@ const renderRecipeItems = (recipeItems) => `
 ${recipeItems.map((recipeItem) => renderRecipeItem(recipeItem)).join("")}
 `;
 
-//TODO: fix - check for which view (yourRecipes vs. browseRecipes", not logged in
-export const recipesView = (currentUser) => `
+export const recipesView = ({
+  currentUser,
+  allRecipes,
+  browseRecipes = true,
+}) => `
 <section class="content section-recipes ${
-  currentUser ? `your-recipes` : `browse-recipes`
+  browseRecipes ? `browse-recipes` : `your-recipes`
 }">
   <div class="recipe-content">
     <h1 class="section-title">${
-      currentUser
-        ? currentUser.firstName != ""
-          ? `${currentUser.firstName}, here are your recipes!`
-          : `Here are your recipes!`
-        : `Recipes: Try some today!`
+      browseRecipes
+        ? `Recipes: Try some today!`
+        : currentUser.firstName != ""
+        ? `${currentUser.firstName}, here are your recipes!`
+        : `Here are your recipes!`
     }</h1>
     <div class="cards">
       ${
-        currentUser
-          ? currentUser.recipes
-            ? renderRecipeItems(currentUser.recipes)
-            : `No recipes yet.`
-          : `<p>Log in to see your recipes</p>`
+        browseRecipes
+          ? renderRecipeItems(allRecipes)
+          : currentUser.recipes
+          ? renderRecipeItems(currentUser.recipes)
+          : `No recipes yet.`
       }
     </div>
   </div>

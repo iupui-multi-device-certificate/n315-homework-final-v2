@@ -5,7 +5,6 @@
 //import views
 import { initFormListeners } from "./formHandlers.js";
 import { homeView } from "./views/homeView.js";
-import { browseView } from "./views/browseView.js";
 import { createRecipeView, renderListItem } from "./views/createRecipeView.js";
 import { recipesView } from "./views/recipesView.js";
 import { loginView } from "./views/loginView.js";
@@ -31,7 +30,7 @@ const app = firebase.app();
 //just provide name of view to map to route, render will actually call the function
 const routes = {
   "#home": homeView,
-  "#browse": browseView,
+  "#browse": recipesView,
   "#createRecipe": createRecipeView,
   "#yourRecipes": recipesView,
   "#login": loginView,
@@ -40,12 +39,26 @@ const routes = {
 const render = (locals) => {
   const path = window.location;
 
+  locals.browseRecipes = false;
+
   //check not empty string
   const hashTag = path.hash !== "" ? path.hash : "#home";
+
+  if (hashTag === "#browse") {
+    locals.browseRecipes = true;
+  }
+
   const page = locals ? routes[hashTag](locals) : routes[hashTag]();
 
   toggleRecipeHero(hashTag);
   toggleCurrentPage(hashTag);
+
+  // else if (hashTag === "#yourRecipe") {
+  //   locals.browseRecipes = false;
+  //   window.location.reload();
+  // }
+
+  console.log(`hash: ${hashTag}`, "locals", locals);
 
   document.querySelector("#app").innerHTML = page;
 };
@@ -133,12 +146,13 @@ const setupUI = async (user = null, allRecipes = null) => {
     );
 
     currentUser.recipes = userRecipes;
-    console.log("currentUser w/ filtered recipes", currentUser);
+    // console.log("currentUser w/ filtered recipes", currentUser);
 
     initFormListeners(currentUser);
 
-    window.onhashchange = () => render(currentUser, allRecipes);
-    render(currentUser, allRecipes);
+    const locals = { currentUser, allRecipes };
+    window.onhashchange = () => render(locals);
+    render(locals);
 
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = false));
@@ -162,8 +176,10 @@ const setupUI = async (user = null, allRecipes = null) => {
     redirectPage();
     initFormListeners(null);
 
-    window.onhashchange = () => render(null, allRecipes);
-    render(null, allRecipes);
+    const locals = { currentUser: null, allRecipes };
+
+    window.onhashchange = () => render(locals);
+    render(locals);
   }
 };
 
@@ -190,7 +206,7 @@ const onAuthInit = () => {
             return allRecipes;
           });
 
-          console.log("allRecipes > allRecipes", allRecipes);
+          // console.log("allRecipes > allRecipes", allRecipes);
 
           setupUI(user, allRecipes);
         });
