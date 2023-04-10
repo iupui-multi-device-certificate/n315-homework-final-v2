@@ -147,7 +147,7 @@ const handleRecipeSubmit = (e, recipeForm, currentUser) => {
 
 //form event listeners
 //add to document since these are dynamically created.
-export const initFormListeners = (currentUser) => {
+export const initFormListeners = (currentUser = null) => {
   document.addEventListener("submit", (e) => {
     // signup
     const signupForm = e.target.closest("#signup-form");
@@ -160,7 +160,9 @@ export const initFormListeners = (currentUser) => {
     if (loginForm) {
       handleLoginSubmit(e, loginForm);
     }
-
+    //TODO: fix recipeForm is not defined when on recipeForm and hit logout
+    //maybe need to check if user???
+    //or remove the listener on logout
     if (recipeForm) {
       handleRecipeSubmit(e, recipeForm, currentUser);
     }

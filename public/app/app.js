@@ -109,22 +109,37 @@ document.addEventListener("change", ({ target }) => {
   }
 });
 
-const setupUI = (currentUser = null) => {
-  //maybe this should be after have user
-  initFormListeners(currentUser);
-
-  window.onhashchange = () => render(currentUser);
-  render(currentUser);
-
+//NOTE: async since we have to wait to get user stuff back
+const setupUI = async (user = null, allRecipes = null) => {
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
   const loggedInButtons = document.querySelectorAll(".btn--logged-in");
 
   //NOTE: better design would be to hide the create recipes page altogether when not logged in
 
-  // const attachFileLabel = document.getElementById("attachFile");
+  if (user) {
+    const currentUser = await firebase
+      .firestore()
+      .collection("Users")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        const data = doc.data();
+        return { userId: doc.id, ...data, isLoggedIn: true };
+      });
 
-  if (currentUser) {
+    const userRecipes = allRecipes.filter(
+      (recipe) => recipe.ownerId === currentUser.userId
+    );
+
+    currentUser.recipes = userRecipes;
+    console.log("currentUser w/ filtered recipes", currentUser);
+
+    initFormListeners(currentUser);
+
+    window.onhashchange = () => render(currentUser, allRecipes);
+    render(currentUser, allRecipes);
+
     // toggle user UI elements
     loggedInLinks.forEach((item) => (item.hidden = false));
     loggedOutLinks.forEach((item) => (item.hidden = true));
@@ -145,56 +160,45 @@ const setupUI = (currentUser = null) => {
     loggedInButtons.forEach((item) => (item.disabled = true));
 
     redirectPage();
+    initFormListeners(null);
+
+    window.onhashchange = () => render(null, allRecipes);
+    render(null, allRecipes);
   }
 };
 
 // listen for auth status changes
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
-    let currentUser = null;
-    let userRecipes = null;
+    let allRecipes = [];
 
-    //TODO: use onsnapshot to have the listener for when changes?
     if (user) {
-      currentUser = await firebase
+      await firebase
         .firestore()
-        .collection("Users")
-        .doc(user.uid)
-        .get()
-        .then((doc) => {
-          const data = doc.data();
-          return { userId: doc.id, ...data, isLoggedIn: true };
-        });
-
-      //https://stackoverflow.com/questions/52100103/getting-all-documents-from-one-collection-in-firestore
-      //See Imanullah solution
-      //might be a way to chain this with above, but this works for now
-      // TODO: maybe use onSnapshot instead of get so these are more live??
-      //https://stackoverflow.com/questions/52309507/firestore-onsnapshot-does-it-work-for-subcollections
-      //https://firebase.google.com/docs/firestore/query-data/listen
-      userRecipes = await firebase
-        .firestore()
-        .collection("Users")
-        .doc(user.uid)
-        .collection("Recipes")
-        .get()
-        .then((querySnapshot) => {
-          const recipes = [];
+        .collectionGroup("Recipes")
+        .onSnapshot((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            recipes.push({ recipeId: doc.id, ...doc.data() });
+            const docRef = doc.ref;
+            const parentCollectionRef = docRef.parent;
+
+            //setting up more like a SQL db w/ a foreign key (lol)
+            allRecipes.push({
+              ownerId: parentCollectionRef.parent.id,
+              recipeId: doc.id,
+              ...doc.data(),
+            });
+            return allRecipes;
           });
-          return recipes;
+
+          console.log("allRecipes > allRecipes", allRecipes);
+
+          setupUI(user, allRecipes);
         });
 
-      currentUser.recipes = userRecipes;
-      console.log("on AuthStateChanged > user logged in ", currentUser);
-
-      setupUI(currentUser);
+      console.log("on AuthStateChanged > user logged in ");
     } else {
+      setupUI(null, allRecipes);
       console.log("on AuthStateChanged > user logged out");
-
-      currentUser = null;
-      setupUI(currentUser);
     }
   });
 };
