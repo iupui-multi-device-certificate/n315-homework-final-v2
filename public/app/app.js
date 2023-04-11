@@ -1,5 +1,3 @@
-//TODO: footer nav routing
-
 //NOTE: do not need DOMContentLoaded listener since our scripts at bottom of body tag and use defer and/or module
 
 //import views
