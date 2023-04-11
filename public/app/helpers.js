@@ -103,3 +103,6 @@ export const uploadImage = async (imageUpload) => {
 export const redirectPage = (pageHash = "#home") => {
   window.location.assign(window.location.origin + `/${pageHash}`);
 };
+
+export const dummyImgUrl =
+"https://dummyimage.com/468x421/fcbcb8/393939.png&text=No+Image";

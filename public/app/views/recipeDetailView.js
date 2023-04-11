@@ -1,3 +1,5 @@
+import { dummyImgUrl } from "../helpers.js";
+
 const renderListItem = (listItem) => `
   <li>${listItem}</li>
 `;
@@ -14,7 +16,9 @@ export const recipeDetailView = (recipe) => `
       <header class="recipe-header">
         <h1 class="recipe-title">${recipe.name}</h1>
         <div class="detail-image-holder">
-          <img src="${recipe.imgUrl}" alt="" />
+          <img src="${
+            recipe.imgUrl != "" ? recipe.imgUrl : dummyImgUrl
+          }" alt="" />
         </div>
       </header>
       <section class="overview">

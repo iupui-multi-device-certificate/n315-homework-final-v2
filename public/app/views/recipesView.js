@@ -2,8 +2,7 @@
 //https://www.webaxe.org/proper-use-buttons-links/
 //https://a11y-101.com/design/button-vs-link
 
-const dummyImgUrl =
-  "https://dummyimage.com/300x263/fcbcb8/393939.png&text=No+Image";
+import { dummyImgUrl } from "../helpers.js";
 
 const renderRecipeItem = (recipeItem) => `
 <div class="card">
