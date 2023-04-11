@@ -35,6 +35,7 @@ const routes = {
 };
 
 const render = (locals) => {
+  const { currentUser, allRecipes } = locals;
   const path = window.location;
 
   locals.browseRecipes = false;
@@ -46,15 +47,17 @@ const render = (locals) => {
     locals.browseRecipes = true;
   }
 
+  if (currentUser) {
+    //filter in the render and set user's recipes so this is live from allRecipes, not just in the setup
+    currentUser.recipes = allRecipes.filter(
+      (recipe) => recipe.ownerId === currentUser.userId
+    );
+  }
+
   const page = locals ? routes[hashTag](locals) : routes[hashTag]();
 
   toggleRecipeHero(hashTag);
   toggleCurrentPage(hashTag);
-
-  // else if (hashTag === "#yourRecipe") {
-  //   locals.browseRecipes = false;
-  //   window.location.reload();
-  // }
 
   console.log(`hash: ${hashTag}`, "locals", locals);
 
@@ -120,31 +123,14 @@ document.addEventListener("change", ({ target }) => {
 });
 
 //NOTE: async since we have to wait to get user stuff back
-const setupUI = async (user = null, allRecipes = null) => {
+const setupUI = async (currentUser = null, allRecipes = null) => {
   const loggedOutLinks = document.querySelectorAll(".logged-out");
   const loggedInLinks = document.querySelectorAll(".logged-in");
   const loggedInButtons = document.querySelectorAll(".btn--logged-in");
 
   //NOTE: better design would be to hide the create recipes page altogether when not logged in
 
-  if (user) {
-    const currentUser = await firebase
-      .firestore()
-      .collection("Users")
-      .doc(user.uid)
-      .get()
-      .then((doc) => {
-        const data = doc.data();
-        return { userId: doc.id, ...data, isLoggedIn: true };
-      });
-
-    const userRecipes = allRecipes.filter(
-      (recipe) => recipe.ownerId === currentUser.userId
-    );
-
-    currentUser.recipes = userRecipes;
-    // console.log("currentUser w/ filtered recipes", currentUser);
-
+  if (currentUser) {
     initFormListeners(currentUser);
 
     const locals = { currentUser, allRecipes };
@@ -181,11 +167,12 @@ const setupUI = async (user = null, allRecipes = null) => {
 };
 
 // listen for auth status changes
+//TODO: set up locals here
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
     let allRecipes = [];
-
     let counter = 1;
+
     await firebase
       .firestore()
       .collectionGroup("Recipes")
@@ -203,7 +190,7 @@ const onAuthInit = () => {
           });
           counter++;
         } else {
-          //check type of change and just push changed doc
+          //check type of change and just push changed doc otherwise get duplicates
           snapshot.docChanges().forEach((change) => {
             const docRef = change.doc.ref;
             const parentCollectionRef = docRef.parent;
@@ -228,23 +215,20 @@ const onAuthInit = () => {
 
           counter++;
         }
-
-        //   //setting up more like a SQL db w/ a foreign key (lol)
-        //   allRecipes.push({
-        //     ownerId: parentCollectionRef.parent.id,
-        //     recipeId: doc.id,
-        //     ...doc.data(),
-        //   });
-        //   return allRecipes;
-        // });
-
-        // console.log("allRecipes > allRecipes", allRecipes);
-
-        // setupUI(user, allRecipes);
       });
 
     if (user) {
-      setupUI(user, allRecipes);
+      const currentUser = await firebase
+        .firestore()
+        .collection("Users")
+        .doc(user.uid)
+        .get()
+        .then((doc) => {
+          const data = doc.data();
+          return { userId: doc.id, ...data, isLoggedIn: true };
+        });
+
+      setupUI(currentUser, allRecipes);
       console.log("on AuthStateChanged > user logged in ");
     } else {
       setupUI(null, allRecipes);
