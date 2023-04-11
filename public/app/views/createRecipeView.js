@@ -17,7 +17,7 @@ export const renderListItem = (itemType, index) => `
       aria-label="input-${itemType}-${index}"
       class="form-element "
     />
-    <button type="button" class="btn--round btn--rose btn--add btn--logged-in" >
+    <button type="button" class="btn--round btn--rose btn--addItem btn--logged-in" >
       +
     </button>
   </div>

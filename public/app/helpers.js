@@ -40,20 +40,6 @@ export const getTextAfterCharacter = (string, character) => {
   return string.substring(string.indexOf(character) + 1);
 };
 
-// see N315 HW06 for usage example
-// click handler to get detail of item, e.g. blog & gallery items
-//since we're only getting recipes make this more specific
-export const itemClickHandler = (itemID, view, items) => {
-  const getItem = (itemID) => items.find((item) => itemID == item.recipeId);
-  const requestedItem = getItem(itemID);
-
-  const itemPage = view(requestedItem);
-
-  //toogle the recipe hero off
-  document.querySelector("html").classList.remove("recipe-hero");
-  document.getElementById("app").innerHTML = itemPage;
-};
-
 /* 
   RESOURCES:
   https://firebase.google.com/docs/storage/web/upload-files

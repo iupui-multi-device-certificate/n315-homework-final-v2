@@ -170,7 +170,11 @@ a {
 }
 
 .hero {
-  background-image: linear-gradient(rgba(242, 92, 84, 0.6), rgba(242, 92, 84, 0.6)), url("../images/hero.jpg");
+  background-image: linear-gradient(
+      rgba(242, 92, 84, 0.6),
+      rgba(242, 92, 84, 0.6)
+    ),
+    url("../images/hero.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -334,8 +338,8 @@ a {
 .disabled,
 button:disabled,
 button[disabled],
-input[type=submit]:disabled,
-input[type=submit][disabled] {
+input[type="submit"]:disabled,
+input[type="submit"][disabled] {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -378,7 +382,7 @@ input[type=submit][disabled] {
   opacity: 1; /* Firefox */
 }
 
-[type=file] {
+[type="file"] {
   border: 0;
   clip: rect(0, 0, 0, 0);
   height: 1px;
@@ -415,15 +419,15 @@ input[type=submit][disabled] {
   position: relative;
 }
 
-.btn--add {
+.btn--addItem {
   display: block;
   position: absolute;
   top: -6px;
   right: 0;
 }
 
-.ingredientsList > .recipe-list-item:not(:last-child) .btn--add,
-.instructionsList > .recipe-list-item:not(:last-child) .btn--add {
+.ingredientsList > .recipe-list-item:not(:last-child) .btn--addItem,
+.instructionsList > .recipe-list-item:not(:last-child) .btn--addItem {
   display: none;
 }
 
@@ -522,7 +526,7 @@ legend {
   background-color: #393939;
 }
 
-.nav-link[aria-current=page]:after {
+.nav-link[aria-current="page"]:after {
   content: "";
   display: block;
   width: 80%;
@@ -751,7 +755,11 @@ footer a {
   }
 }
 .recipe-hero {
-  background: linear-gradient(rgba(167, 232, 189, 0.8), rgba(167, 232, 189, 0.8)), url("../images/recipes/recipe-hero.jpg") no-repeat center center fixed;
+  background: linear-gradient(
+      rgba(167, 232, 189, 0.8),
+      rgba(167, 232, 189, 0.8)
+    ),
+    url("../images/recipes/recipe-hero.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 

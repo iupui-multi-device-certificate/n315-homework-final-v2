@@ -3,20 +3,24 @@
 //import views
 import { initFormListeners } from "./formHandlers.js";
 import { homeView } from "./views/homeView.js";
-import { createRecipeView, renderListItem } from "./views/createRecipeView.js";
+import { createRecipeView } from "./views/createRecipeView.js";
 import { recipesView } from "./views/recipesView.js";
 import { loginView } from "./views/loginView.js";
-import { recipeDetailView } from "./views/recipeDetailView.js";
 
 //import helpers
 import {
   toggleCurrentPage,
   toggleMobileMenu,
   toggleRecipeHero,
-  itemClickHandler,
-  getTextAfterCharacter,
   redirectPage,
 } from "./helpers.js";
+
+import {
+  handleLogout,
+  handleViewButtonClick,
+  handleAddItemButtonClick,
+  handleRecipeImageChange,
+} from "./eventHandlers.js";
 
 //import user feedback messags
 import { MESSAGES } from "./messages.js";
@@ -64,61 +68,33 @@ const render = (locals) => {
   document.querySelector("#app").innerHTML = page;
 };
 
-const handleLogout = () => {
-  firebase.auth().signOut();
-  alert(MESSAGES.INFO_LOGOUT);
-};
-
-const handleViewButtonClick = (target, currentUser) => {
-  const currentId = getTextAfterCharacter(target.id, "-");
-  itemClickHandler(currentId, recipeDetailView, currentUser.recipes);
-};
-
 //add generic click listners
-document.addEventListener("click", ({ target }) => {
-  if (target.id === "#logout") {
+document.addEventListener("click", (e) => {
+  console.log(e);
+  if (e.target.id === "#logout") {
     handleLogout();
   }
 
   if (
-    target.classList.contains("hamburger") ||
-    target.classList.contains("bar") ||
-    target.classList.contains("nav-link")
+    e.target.classList.contains("hamburger") ||
+    e.target.classList.contains("bar") ||
+    e.target.classList.contains("nav-link")
   ) {
     toggleMobileMenu();
   }
 
-  if (target.classList.contains("btn--add")) {
-    const splitId = target.parentElement.id.split("-");
-    const newId = parseInt(splitId[1]) + 1;
-    const newItem = renderListItem(splitId[0], newId);
-    target.parentElement.insertAdjacentHTML("afterend", newItem);
+  if (e.target.classList.contains("btn--addItem")) {
+    handleAddItemButtonClick(e);
   }
 
-  if (target.classList.contains("btn--close")) {
+  if (e.target.classList.contains("btn--close")) {
     window.location.reload();
   }
 });
 
-document.addEventListener("change", ({ target }) => {
-  if (target.id === "recipeImage") {
-    //check correct image format
-    //https://www.geeksforgeeks.org/file-type-validation-while-uploading-it-using-javascript/#
-    // https://dev.to/faddalibrahim/filtering-and-validating-file-uploads-with-javascript-327p
-
-    const fileInput = target.files[0];
-
-    const allowedExtensions = ["jpg", "jpeg", "png"];
-    const { name: fileName } = fileInput;
-    const fileExtension = fileName.split(".").pop();
-    if (!allowedExtensions.includes(fileExtension)) {
-      alert(MESSAGES.ERROR_IMG_FILE_TYPE);
-      fileInput.value = null;
-      //this ensures the text restores back to "Add Recipe Image"
-      return false;
-    }
-
-    document.getElementById("imgUploadText").innerHTML = target.files[0].name;
+document.addEventListener("change", (e) => {
+  if (e.target.id === "recipeImage") {
+    handleRecipeImageChange(e);
   }
 });
 
@@ -144,9 +120,9 @@ const setupUI = async (currentUser = null, allRecipes = null) => {
     loggedInButtons.forEach((item) => (item.disabled = false));
 
     //add detail page listener after have a user
-    document.addEventListener("click", ({ target }) => {
-      if (target.classList.contains("btn--view")) {
-        handleViewButtonClick(target, currentUser);
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn--view")) {
+        handleViewButtonClick(e, currentUser);
       }
     });
   } else {

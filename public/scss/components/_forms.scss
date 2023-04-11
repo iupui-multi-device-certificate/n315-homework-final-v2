@@ -71,7 +71,7 @@ $margin-bottom-large: 5rem;
   position: relative;
 }
 
-.btn--add {
+.btn--addItem {
   // margin-bottom: 6px;
   display: block;
   position: absolute;
@@ -79,8 +79,8 @@ $margin-bottom-large: 5rem;
   right: 0;
 }
 
-.ingredientsList > .recipe-list-item:not(:last-child) .btn--add,
-.instructionsList > .recipe-list-item:not(:last-child) .btn--add {
+.ingredientsList > .recipe-list-item:not(:last-child) .btn--addItem,
+.instructionsList > .recipe-list-item:not(:last-child) .btn--addItem {
   display: none;
 }
 
