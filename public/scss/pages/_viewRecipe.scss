@@ -14,27 +14,19 @@
 }
 
 .top {
-  // min-width: 100%;
-  background-color: purple;
   flex-grow: 1;
 }
 .overview {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // flex-grow: 1;
-  // min-width: 100%;
-  // background-color: aqua;
-  // gap: 1.875rem;
 }
 .recipe-header {
   display: flex;
   gap: 0.625rem;
-  // background-color: pink;
 
   img {
     max-width: 100%;
-    // height: auto;
   }
 }
 
@@ -52,13 +44,10 @@
   font-weight: $dark-weight;
   letter-spacing: 5px;
   line-height: 33px;
-
-  // margin-bottom: 2.188rem;
 }
 
 //ensures description doesn't get too big when displaying
 .recipe-description {
-  // background-color: aquamarine;
   max-height: 106px;
   overflow: hidden;
 }
