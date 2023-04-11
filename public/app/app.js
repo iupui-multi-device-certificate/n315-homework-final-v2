@@ -1,63 +1,14 @@
 //NOTE: do not need DOMContentLoaded listener since our scripts at bottom of body tag and use defer and/or module
 
-//import views
 import { initListeners } from "./events/initListeners.js";
-import { homeView } from "./views/homeView.js";
-import { createRecipeView } from "./views/createRecipeView.js";
-import { recipesView } from "./views/recipesView.js";
-import { loginView } from "./views/loginView.js";
-
+import { render } from "./router.js";
 //import helpers
-import {
-  toggleCurrentPage,
-  toggleRecipeHero,
-  redirectPage,
-} from "./helpers.js";
+import { redirectPage } from "./helpers.js";
 
 import { handleViewButtonClick } from "./events/eventHandlers.js";
 
 //init the firebase app
 const app = firebase.app();
-
-//? maybe move render & handleLogout to separate file?
-//just provide name of view to map to route, render will actually call the function
-const routes = {
-  "#home": homeView,
-  "#browse": recipesView,
-  "#createRecipe": createRecipeView,
-  "#yourRecipes": recipesView,
-  "#login": loginView,
-};
-
-const render = (locals) => {
-  const { currentUser, allRecipes } = locals;
-  const path = window.location;
-
-  locals.browseRecipes = false;
-
-  //check not empty string
-  const hashTag = path.hash !== "" ? path.hash : "#home";
-
-  if (hashTag === "#browse") {
-    locals.browseRecipes = true;
-  }
-
-  if (currentUser) {
-    //filter in the render and set user's recipes so this is live from allRecipes, not just in the setup
-    currentUser.recipes = allRecipes.filter(
-      (recipe) => recipe.ownerId === currentUser.userId
-    );
-  }
-
-  const page = locals ? routes[hashTag](locals) : routes[hashTag]();
-
-  toggleRecipeHero(hashTag);
-  toggleCurrentPage(hashTag);
-
-  console.log(`hash: ${hashTag}`, "locals", locals);
-
-  document.querySelector("#app").innerHTML = page;
-};
 
 //NOTE: async since we have to wait to get user stuff back
 const setupUI = async (currentUser = null, allRecipes = null) => {
