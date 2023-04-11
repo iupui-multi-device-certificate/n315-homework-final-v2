@@ -13,6 +13,36 @@ import {
 } from "./eventHandlers.js";
 
 //add to document since these are dynamically created.
+
+//add generic click listners
+document.addEventListener("click", (e) => {
+  if (e.target.id === "#logout") {
+    handleLogout();
+  }
+
+  if (
+    e.target.classList.contains("hamburger") ||
+    e.target.classList.contains("bar") ||
+    e.target.classList.contains("nav-link")
+  ) {
+    toggleMobileMenu();
+  }
+
+  if (e.target.classList.contains("btn--addItem")) {
+    handleAddItemButtonClick(e);
+  }
+
+  if (e.target.classList.contains("btn--close")) {
+    window.location.reload();
+  }
+});
+
+document.addEventListener("change", (e) => {
+  if (e.target.id === "recipeImage") {
+    handleRecipeImageChange(e);
+  }
+});
+
 //form event listeners
 export const initListeners = (currentUser = null) => {
   document.addEventListener("submit", (e) => {
@@ -32,35 +62,6 @@ export const initListeners = (currentUser = null) => {
     const recipeForm = e.target.closest("#recipe-form");
     if (recipeForm) {
       handleRecipeSubmit(e, recipeForm, currentUser);
-    }
-  });
-
-  //add generic click listners
-  document.addEventListener("click", (e) => {
-    if (e.target.id === "#logout") {
-      handleLogout();
-    }
-
-    if (
-      e.target.classList.contains("hamburger") ||
-      e.target.classList.contains("bar") ||
-      e.target.classList.contains("nav-link")
-    ) {
-      toggleMobileMenu();
-    }
-
-    if (e.target.classList.contains("btn--addItem")) {
-      handleAddItemButtonClick(e);
-    }
-
-    if (e.target.classList.contains("btn--close")) {
-      window.location.reload();
-    }
-  });
-
-  document.addEventListener("change", (e) => {
-    if (e.target.id === "recipeImage") {
-      handleRecipeImageChange(e);
     }
   });
 };
