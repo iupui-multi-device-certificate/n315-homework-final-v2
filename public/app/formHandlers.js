@@ -98,7 +98,6 @@ const handleLoginSubmit = (e, loginForm) => {
     });
 };
 
-//TODO: ing & inst not saving??
 const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
   e.preventDefault();
 
@@ -126,8 +125,6 @@ const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
     ingredients,
     instructions,
   };
-
-  console.log("handle recipe > recipe w/ url", recipe);
 
   firebase
     .firestore()

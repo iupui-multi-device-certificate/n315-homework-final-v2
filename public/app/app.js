@@ -88,7 +88,6 @@ document.addEventListener("click", ({ target }) => {
   if (target.classList.contains("btn--add")) {
     const splitId = target.parentElement.id.split("-");
     const newId = parseInt(splitId[1]) + 1;
-    console.log("new id", newId);
     const newItem = renderListItem(splitId[0], newId);
     target.parentElement.insertAdjacentHTML("afterend", newItem);
   }
