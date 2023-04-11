@@ -1,7 +1,7 @@
 //NOTE: do not need DOMContentLoaded listener since our scripts at bottom of body tag and use defer and/or module
 
 //import views
-import { initFormListeners } from "./formHandlers.js";
+import { initListeners } from "./events/initListeners.js";
 import { homeView } from "./views/homeView.js";
 import { createRecipeView } from "./views/createRecipeView.js";
 import { recipesView } from "./views/recipesView.js";
@@ -10,20 +10,11 @@ import { loginView } from "./views/loginView.js";
 //import helpers
 import {
   toggleCurrentPage,
-  toggleMobileMenu,
   toggleRecipeHero,
   redirectPage,
 } from "./helpers.js";
 
-import {
-  handleLogout,
-  handleViewButtonClick,
-  handleAddItemButtonClick,
-  handleRecipeImageChange,
-} from "./eventHandlers.js";
-
-//import user feedback messags
-import { MESSAGES } from "./messages.js";
+import { handleViewButtonClick } from "./events/eventHandlers.js";
 
 //init the firebase app
 const app = firebase.app();
@@ -68,36 +59,6 @@ const render = (locals) => {
   document.querySelector("#app").innerHTML = page;
 };
 
-//add generic click listners
-document.addEventListener("click", (e) => {
-  console.log(e);
-  if (e.target.id === "#logout") {
-    handleLogout();
-  }
-
-  if (
-    e.target.classList.contains("hamburger") ||
-    e.target.classList.contains("bar") ||
-    e.target.classList.contains("nav-link")
-  ) {
-    toggleMobileMenu();
-  }
-
-  if (e.target.classList.contains("btn--addItem")) {
-    handleAddItemButtonClick(e);
-  }
-
-  if (e.target.classList.contains("btn--close")) {
-    window.location.reload();
-  }
-});
-
-document.addEventListener("change", (e) => {
-  if (e.target.id === "recipeImage") {
-    handleRecipeImageChange(e);
-  }
-});
-
 //NOTE: async since we have to wait to get user stuff back
 const setupUI = async (currentUser = null, allRecipes = null) => {
   const loggedOutLinks = document.querySelectorAll(".logged-out");
@@ -107,7 +68,7 @@ const setupUI = async (currentUser = null, allRecipes = null) => {
   //NOTE: better design would be to hide the create recipes page altogether when not logged in
 
   if (currentUser) {
-    initFormListeners(currentUser);
+    initListeners(currentUser);
 
     const locals = { currentUser, allRecipes };
     window.onhashchange = () => render(locals);
@@ -133,7 +94,7 @@ const setupUI = async (currentUser = null, allRecipes = null) => {
     loggedInButtons.forEach((item) => (item.disabled = true));
 
     redirectPage();
-    initFormListeners(null);
+    initListeners(null);
 
     const locals = { currentUser: null, allRecipes };
 
