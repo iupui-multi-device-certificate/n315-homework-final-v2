@@ -27,9 +27,9 @@ export const initListeners = (currentUser = null) => {
     if (loginForm) {
       handleLoginSubmit(e, loginForm);
     }
-    //TODO: fix recipeForm is not defined when on recipeForm and hit logout
-    //maybe need to check if user???
-    //or remove the listener on logout
+
+    //recipeForm not defined error occurred b/c had set id of form to recipeForm and was using directly instead of checking for closest.
+    const recipeForm = e.target.closest("#recipe-form");
     if (recipeForm) {
       handleRecipeSubmit(e, recipeForm, currentUser);
     }

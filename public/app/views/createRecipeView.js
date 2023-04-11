@@ -34,7 +34,7 @@ const renderListItems = (itemType) => `
 
 export const createRecipeView = ({ currentUser }) => `
   <section class="content section-recipe-form">
-    <form class="recipe-form" id="recipeForm">      
+    <form class="recipe-form" id="recipe-form">      
       <h1 class="form-title">${
         currentUser
           ? `${currentUser.firstName}, create your recipe!`
