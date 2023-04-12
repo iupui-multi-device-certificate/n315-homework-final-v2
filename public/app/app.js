@@ -44,7 +44,6 @@ const setupUI = async (currentUser = null, allRecipes = null) => {
 
     loggedInButtons.forEach((item) => (item.disabled = true));
 
-    redirectPage();
     initListeners(null);
 
     const locals = { currentUser: null, allRecipes };
