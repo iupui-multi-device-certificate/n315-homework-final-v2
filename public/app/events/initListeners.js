@@ -10,41 +10,42 @@ import {
   handleLogout,
   handleAddItemButtonClick,
   handleRecipeImageChange,
+  handleViewButtonClick,
 } from "./eventHandlers.js";
 
 //add to document since these are dynamically created.
 
-//add generic click listners
-document.addEventListener("click", (e) => {
-  if (e.target.id === "#logout") {
-    handleLogout();
-  }
+export const initListeners = () => {
+  //add generic click listners
+  document.addEventListener("click", (e) => {
+    if (e.target.id === "#logout") {
+      handleLogout();
+    }
 
-  if (
-    e.target.classList.contains("hamburger") ||
-    e.target.classList.contains("bar") ||
-    e.target.classList.contains("nav-link")
-  ) {
-    toggleMobileMenu();
-  }
+    if (
+      e.target.classList.contains("hamburger") ||
+      e.target.classList.contains("bar") ||
+      e.target.classList.contains("nav-link")
+    ) {
+      toggleMobileMenu();
+    }
 
-  if (e.target.classList.contains("btn--addItem")) {
-    handleAddItemButtonClick(e);
-  }
+    if (e.target.classList.contains("btn--addItem")) {
+      handleAddItemButtonClick(e);
+    }
 
-  if (e.target.classList.contains("btn--close")) {
-    window.location.reload();
-  }
-});
+    if (e.target.classList.contains("btn--close")) {
+      window.location.reload();
+    }
+  });
 
-document.addEventListener("change", (e) => {
-  if (e.target.id === "recipeImage") {
-    handleRecipeImageChange(e);
-  }
-});
+  document.addEventListener("change", (e) => {
+    if (e.target.id === "recipeImage") {
+      handleRecipeImageChange(e);
+    }
+  });
 
-//form event listeners
-export const initListeners = (currentUser = null) => {
+  //auth form event listeners
   document.addEventListener("submit", (e) => {
     // signup
     const signupForm = e.target.closest("#signup-form");
@@ -57,10 +58,21 @@ export const initListeners = (currentUser = null) => {
     if (loginForm) {
       handleLoginSubmit(e, loginForm);
     }
+  });
+};
 
+//only add listeners if user logged in
+export const initLoggedInListeners = (currentUser) => {
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--view") && currentUser) {
+      handleViewButtonClick(e, currentUser);
+    }
+  });
+
+  document.addEventListener("submit", (e) => {
     //recipeForm not defined error occurred b/c had set id of form to recipeForm and was using directly instead of checking for closest.
     const recipeForm = e.target.closest("#recipe-form");
-    if (recipeForm) {
+    if (recipeForm && currentUser) {
       handleRecipeSubmit(e, recipeForm, currentUser);
     }
   });

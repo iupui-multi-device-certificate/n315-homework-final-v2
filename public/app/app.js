@@ -1,64 +1,25 @@
 //NOTE: do not need DOMContentLoaded listener since our scripts at bottom of body tag and use defer and/or module
 
-import { initListeners } from "./events/initListeners.js";
+// import { initListeners } from "./events/initListeners.js";
 import { render } from "./router.js";
 //import helpers
-import { redirectPage } from "./helpers.js";
+import { toggleShowLoggedIn, redirectPage } from "./helpers.js";
 
-import { handleViewButtonClick } from "./events/eventHandlers.js";
+import {
+  initListeners,
+  initLoggedInListeners,
+} from "./events/initListeners.js";
 
 //init the firebase app
 const app = firebase.app();
 
-//NOTE: async since we have to wait to get user stuff back
-const setupUI = async (currentUser = null, allRecipes = null) => {
-  const loggedOutLinks = document.querySelectorAll(".logged-out");
-  const loggedInLinks = document.querySelectorAll(".logged-in");
-  const loggedInButtons = document.querySelectorAll(".btn--logged-in");
-
-  //NOTE: better design would be to hide the create recipes page altogether when not logged in
-
-  if (currentUser) {
-    initListeners(currentUser);
-
-    const locals = { currentUser, allRecipes };
-    window.onhashchange = () => render(locals);
-    render(locals);
-
-    // toggle user UI elements
-    loggedInLinks.forEach((item) => (item.hidden = false));
-    loggedOutLinks.forEach((item) => (item.hidden = true));
-
-    loggedInButtons.forEach((item) => (item.disabled = false));
-
-    //add detail page listener after have a user
-    document.addEventListener("click", (e) => {
-      if (e.target.classList.contains("btn--view")) {
-        handleViewButtonClick(e, currentUser);
-      }
-    });
-  } else {
-    // toggle user UI elements
-    loggedInLinks.forEach((item) => (item.hidden = true));
-    loggedOutLinks.forEach((item) => (item.hidden = false));
-
-    loggedInButtons.forEach((item) => (item.disabled = true));
-
-    initListeners(null);
-
-    const locals = { currentUser: null, allRecipes };
-
-    window.onhashchange = () => render(locals);
-    render(locals);
-  }
-};
-
 // listen for auth status changes
-//TODO: set up locals here
+
 const onAuthInit = () => {
   firebase.auth().onAuthStateChanged(async (user) => {
     let allRecipes = [];
     let counter = 1;
+    let locals = {};
 
     await firebase
       .firestore()
@@ -115,14 +76,22 @@ const onAuthInit = () => {
           return { userId: doc.id, ...data, isLoggedIn: true };
         });
 
-      setupUI(currentUser, allRecipes);
+      initLoggedInListeners(currentUser);
+      toggleShowLoggedIn(currentUser);
+      locals = { currentUser, allRecipes };
       console.log("on AuthStateChanged > user logged in ");
+      redirectPage();
     } else {
-      setupUI(null, allRecipes);
+      toggleShowLoggedIn(null);
+      locals = { currentUser: null, allRecipes };
       console.log("on AuthStateChanged > user logged out");
+      redirectPage();
     }
+
+    window.onhashchange = () => render(locals);
   });
 };
 
 //now that have other stuff, init our auth
 onAuthInit();
+initListeners();

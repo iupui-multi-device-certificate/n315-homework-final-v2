@@ -86,9 +86,28 @@ export const uploadImage = async (imageUpload) => {
   });
 };
 
+//todo: move this to router
 export const redirectPage = (pageHash = "#home") => {
   window.location.assign(window.location.origin + `/${pageHash}`);
 };
 
 export const dummyImgUrl =
-"https://dummyimage.com/468x421/fcbcb8/393939.png&text=No+Image";
+  "https://dummyimage.com/468x421/fcbcb8/393939.png&text=No+Image";
+
+export const toggleShowLoggedIn = (currentUser) => {
+  const loggedOutLinks = document.querySelectorAll(".logged-out");
+  const loggedInLinks = document.querySelectorAll(".logged-in");
+  const loggedInButtons = document.querySelectorAll(".btn--logged-in");
+
+  if (currentUser) {
+    loggedInLinks.forEach((item) => (item.hidden = false));
+    loggedOutLinks.forEach((item) => (item.hidden = true));
+
+    loggedInButtons.forEach((item) => (item.disabled = false));
+  } else {
+    loggedInLinks.forEach((item) => (item.hidden = true));
+    loggedOutLinks.forEach((item) => (item.hidden = false));
+
+    loggedInButtons.forEach((item) => (item.disabled = true));
+  }
+};
