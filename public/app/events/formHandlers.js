@@ -126,7 +126,7 @@ export const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
     instructions,
   };
 
-  firebase
+  await firebase
     .firestore()
     .collection("Users")
     .doc(userId)
@@ -147,5 +147,3 @@ const getValuesFromInputsByName = (nameOfList) => {
   const valuesArray = Array.from(elementList).map((el) => el.value);
   return valuesArray;
 };
-
-

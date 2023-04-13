@@ -21,10 +21,14 @@ const onAuthInit = () => {
     let counter = 1;
     let locals = {};
 
+    //check on metadata changes so only see the log once
+    //otherwise, it fires 2x but no duplicates in db
+    // https://cloud.google.com/firestore/docs/query-data/listen
+    // https://medium.com/firebase-developers/firestore-clients-to-cache-or-not-to-cache-or-both-8f66a239c329
     await firebase
       .firestore()
       .collectionGroup("Recipes")
-      .onSnapshot((snapshot) => {
+      .onSnapshot({ includeMetadataChanges: true }, (snapshot) => {
         if (counter === 1) {
           //initial load
           snapshot.forEach((doc) => {
@@ -46,7 +50,10 @@ const onAuthInit = () => {
             const data = change.doc.data();
 
             if (change.type === "added") {
-              console.log(`Recipe added with id: ${change.doc.id}`, change.doc.data());
+              console.log(
+                `Recipe added with id: ${change.doc.id}`,
+                change.doc.data()
+              );
               allRecipes.push({
                 ownerId: parentCollectionRef.parent.id,
                 recipeId,
@@ -54,10 +61,16 @@ const onAuthInit = () => {
               });
             }
             if (change.type === "modified") {
-              console.log(`Recipe modified with id: ${change.doc.id}`, change.doc.data());
+              console.log(
+                `Recipe modified with id: ${change.doc.id}`,
+                change.doc.data()
+              );
             }
             if (change.type === "removed") {
-              console.log(`Recipe removed with id: ${change.doc.id}`, change.doc.data());
+              console.log(
+                `Recipe removed with id: ${change.doc.id}`,
+                change.doc.data()
+              );
             }
           });
 
@@ -82,6 +95,7 @@ const onAuthInit = () => {
       console.log("on AuthStateChanged > user logged in ");
       redirectPage();
     } else {
+      //todo: remove loggedInListeners
       toggleShowLoggedIn(null);
       locals = { currentUser: null, allRecipes };
       console.log("on AuthStateChanged > user logged out");
