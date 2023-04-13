@@ -18,4 +18,5 @@ export const MESSAGES = {
   ERROR_IMG_UPLOAD:
     "Image upload failed. Contact your admin for further assistance",
   SUCCESS_RECIPE_CREATED: "Recipe created.",
+  ERROR_RECIPE_NOT_CREATED: "Error creating recipe. Please try again later.",
 };

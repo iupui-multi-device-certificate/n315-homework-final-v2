@@ -126,17 +126,10 @@ export const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
     instructions,
   };
 
-  await firebase
-    .firestore()
-    .collection("Users")
-    .doc(userId)
-    .collection("Recipes")
-    .add(recipe);
-
-  console.log("recipe created");
+  const result = await addRecipe(userId, recipe);
 
   recipeForm.reset();
-  alert(MESSAGES.SUCCESS_RECIPE_CREATED);
+  alert(result.message);
   //set the image upload text back
   document.getElementById("imgUploadText").innerHTML = "Add Recipe Image";
 };
@@ -146,4 +139,33 @@ const getValuesFromInputsByName = (nameOfList) => {
 
   const valuesArray = Array.from(elementList).map((el) => el.value);
   return valuesArray;
+};
+
+const addRecipe = async (userId, recipe) => {
+  let result = {
+    success: false,
+    message: "",
+  };
+  await firebase
+    .firestore()
+    .collection("Users")
+    .doc(userId)
+    .collection("Recipes")
+    .add(recipe)
+    .then((docRef) => {
+      console.log(MESSAGES.SUCCESS_RECIPE_CREATED + " RecipeID:", docRef.id);
+
+      result = {
+        success: true,
+        message: MESSAGES.SUCCESS_RECIPE_CREATED,
+      };
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+      result = {
+        success: false,
+        message: MESSAGES.ERROR_RECIPE_NOT_CREATED,
+      };
+    });
+  return result;
 };
