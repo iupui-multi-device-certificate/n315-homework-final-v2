@@ -147,3 +147,5 @@ const getValuesFromInputsByName = (nameOfList) => {
   const valuesArray = Array.from(elementList).map((el) => el.value);
   return valuesArray;
 };
+
+

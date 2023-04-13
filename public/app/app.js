@@ -46,7 +46,7 @@ const onAuthInit = () => {
             const data = change.doc.data();
 
             if (change.type === "added") {
-              console.log("Recipe: ", change.doc.data());
+              console.log(`Recipe added with id: ${change.doc.id}`, change.doc.data());
               allRecipes.push({
                 ownerId: parentCollectionRef.parent.id,
                 recipeId,
@@ -54,10 +54,10 @@ const onAuthInit = () => {
               });
             }
             if (change.type === "modified") {
-              console.log("Recipe: ", change.doc.data());
+              console.log(`Recipe modified with id: ${change.doc.id}`, change.doc.data());
             }
             if (change.type === "removed") {
-              console.log("Recipe: ", change.doc.data());
+              console.log(`Recipe removed with id: ${change.doc.id}`, change.doc.data());
             }
           });
 
