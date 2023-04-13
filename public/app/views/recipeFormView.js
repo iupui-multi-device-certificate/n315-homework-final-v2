@@ -32,7 +32,7 @@ const renderListItems = (itemType) => `
   ${[...Array(n)].map((_, i) => renderListItem(itemType, i + 1)).join("")}
 `;
 
-export const createRecipeView = ({ currentUser }) => `
+export const recipeFormView = ({ currentUser }) => `
   <section class="content section-recipe-form">
     <form class="recipe-form" id="recipe-form">      
       <h1 class="form-title">${
@@ -107,8 +107,8 @@ export const createRecipeView = ({ currentUser }) => `
         type="submit"
         value="Create Recipe"
         class="btn btn--wide btn--rose btn--disabled btn--logged-in"
-        name="createRecipe"
-        id="createRecipe"
+        name="submitRecipe"
+        id="submitRecipe"
       />
     </form>
   </section> 

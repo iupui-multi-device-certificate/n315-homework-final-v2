@@ -49,6 +49,7 @@ const onAuthInit = () => {
             const recipeId = change.doc.id;
             const data = change.doc.data();
 
+            //TODO: still seeing this called 2x, esp. w/ image & slower connection. Does not create duplicates in db or state.
             if (change.type === "added") {
               console.log(
                 `Recipe added with id: ${change.doc.id}`,

@@ -1,6 +1,6 @@
 import { homeView } from "./views/homeView.js";
 import { recipesView } from "./views/recipesView.js";
-import { createRecipeView } from "./views/createRecipeView.js";
+import { recipeFormView } from "./views/recipeFormView.js";
 import { loginView } from "./views/loginView.js";
 
 import { toggleCurrentPage, toggleRecipeHero } from "./helpers.js";
@@ -9,7 +9,7 @@ import { toggleCurrentPage, toggleRecipeHero } from "./helpers.js";
 const routes = {
   "#home": homeView,
   "#browse": recipesView,
-  "#createRecipe": createRecipeView,
+  "#createRecipe": recipeFormView,
   "#yourRecipes": recipesView,
   "#login": loginView,
 };

@@ -1,7 +1,7 @@
 import { getTextAfterCharacter } from "../helpers.js";
 import { recipeDetailView } from "../views/recipeDetailView.js";
 import { MESSAGES } from "../messages.js";
-import { renderListItem } from "../views/createRecipeView.js";
+import { renderListItem } from "../views/recipeFormView.js";
 import { redirectPage } from "../helpers.js";
 
 export const handleLogout = () => {
