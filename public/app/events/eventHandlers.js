@@ -17,7 +17,7 @@ export const handleLogout = () => {
   redirectPage();
 };
 
-//TODO: convert to hash tag routing method?
+//MAYBE: ?convert to hash tag routing method?
 export const handleViewButtonClick = (e, currentUser) => {
   const currentId = getTextAfterCharacter(e.target.id, "-");
   itemClickHandler(currentId, recipeDetailView, currentUser.recipes);

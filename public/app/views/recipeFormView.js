@@ -41,7 +41,6 @@ const renderListItems = (itemType, items) => `
     .join("")}
 `;
 
-//TODO: maybe add a close button on the edit version??
 //Skip trying to get previous image info since long URL & has token. In real life, this would have a drag/drop photo uploader that would make it to allow preload & view image.
 // Use hidden input to pass recipeId when editing
 export const recipeFormView = ({
