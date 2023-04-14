@@ -10,6 +10,7 @@ const routes = {
   "#home": homeView,
   "#browse": recipesView,
   "#createRecipe": recipeFormView,
+  "#editRecipe": recipeFormView,
   "#yourRecipes": recipesView,
   "#login": loginView,
 };
@@ -20,11 +21,17 @@ export const render = (locals) => {
 
   locals.browseRecipes = false;
 
-  //check not empty string
-  const hashTag = path.hash !== "" ? path.hash : "#home";
+  const hashArray = path.hash.split("/");
+
+  const hashTag = hashArray[0] !== "" ? hashArray[0] : "#home";
+
+  console.log(`hash: ${hashTag}`, "locals", locals);
 
   if (hashTag === "#browse") {
     locals.browseRecipes = true;
+  } else if (hashTag === "#editRecipe") {
+    locals.editRecipe = true;
+    locals.recipeId = hashArray[1];
   }
 
   if (currentUser) {
@@ -38,8 +45,6 @@ export const render = (locals) => {
 
   toggleRecipeHero(hashTag);
   toggleCurrentPage(hashTag);
-
-  console.log(`hash: ${hashTag}`, "locals", locals);
 
   document.querySelector("#app").innerHTML = page;
 };

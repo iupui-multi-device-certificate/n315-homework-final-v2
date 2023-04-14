@@ -45,8 +45,14 @@ export const recipeDetailView = (recipe) => `
         ${renderListItems(recipe.instructions)}
       </ol>
     </section>
+    <!--
     <button class="btn btn--small btn--naplesYellow" id="editButton">
       Edit
-    </button>
+    </button> -->
+    <a 
+    href="#editRecipe/${
+      recipe.recipeId
+    }" class="btn btn--small btn--naplesYellow">Edit
+  </a>
   </section>
 `;

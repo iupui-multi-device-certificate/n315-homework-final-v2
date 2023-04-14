@@ -39,11 +39,11 @@ const renderRecipeItem = (recipeItem) => `
   </div>
 
   <div class="button-holder">
-    <button
-      class="btn btn--small btn--naplesYellow btn--edit"
-      id="editButton-${recipeItem.recipeId}"
-      >Edit
-    </button>
+    <a 
+      href="#editRecipe/${
+        recipeItem.recipeId
+      }" class="btn btn--small btn--naplesYellow btn--edit">Edit
+    </a>
     <button
       class="btn btn--small btn--naplesYellow btn--delete"
       id="deleteButton-${recipeItem.recipeId}"

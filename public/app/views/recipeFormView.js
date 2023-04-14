@@ -32,12 +32,19 @@ const renderListItems = (itemType) => `
   ${[...Array(n)].map((_, i) => renderListItem(itemType, i + 1)).join("")}
 `;
 
-export const recipeFormView = ({ currentUser }) => `
+//TODO: maybe add a close button on the edit version??
+export const recipeFormView = ({
+  currentUser,
+  editRecipe = false,
+  recipeId = "",
+}) => `
   <section class="content section-recipe-form">
     <form class="recipe-form" id="recipe-form">      
       <h1 class="form-title">${
         currentUser
-          ? `${currentUser.firstName}, create your recipe!`
+          ? `${currentUser.firstName}, ${
+              editRecipe ? "edit" : "create"
+            } your recipe!`
           : `Sign in to create a recipe!`
       }</h1>
       <fieldset>
@@ -105,7 +112,7 @@ export const recipeFormView = ({ currentUser }) => `
       </fieldset>
       <input
         type="submit"
-        value="Create Recipe"
+        value="${editRecipe ? "Submit Changes" : "Create Recipe"}"
         class="btn btn--wide btn--rose btn--disabled btn--logged-in"
         name="submitRecipe"
         id="submitRecipe"
