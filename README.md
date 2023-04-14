@@ -27,6 +27,12 @@ The Jungle Cook is a Vanilla JavaScript Single-Page CRUD Application that allows
 - Implements browse recipes which shows all recipes not just the user's recipes (re-uses the view page)
 - Reused recipeForm for both creating and editng recipes
 
+## TEST USER
+
+- name: Michael
+- email: m@m.com
+- password: 123456
+
 ## ISSUES
 
 - Font loading issue in Firefox:
@@ -61,6 +67,7 @@ The Jungle Cook is a Vanilla JavaScript Single-Page CRUD Application that allows
 ## TODO
 
 - Protect the createRecipe route so it redirects to login if not logged in and goes back
+- Hide close button on createRecipe page
 - Require user first name
 - Fix reload flashes when close from editing recipe
 - Remove loggedInListeners on logout
