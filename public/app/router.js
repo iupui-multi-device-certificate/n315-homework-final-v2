@@ -2,7 +2,7 @@ import { homeView } from "./views/homeView.js";
 import { recipesView } from "./views/recipesView.js";
 import { recipeFormView } from "./views/recipeFormView.js";
 import { loginView } from "./views/loginView.js";
-
+import { getItem } from "./helpers.js";
 import { toggleCurrentPage, toggleRecipeHero } from "./helpers.js";
 
 //just provide name of view to map to route, render will actually call the function
@@ -29,9 +29,6 @@ export const render = (locals) => {
 
   if (hashTag === "#browse") {
     locals.browseRecipes = true;
-  } else if (hashTag === "#editRecipe") {
-    locals.editRecipe = true;
-    locals.recipeId = hashArray[1];
   }
 
   if (currentUser) {
@@ -39,6 +36,16 @@ export const render = (locals) => {
     currentUser.recipes = allRecipes.filter(
       (recipe) => recipe.ownerId === currentUser.userId
     );
+
+    //only get this if user logged in.
+    // otherwise, can have bug when tries fetch the recipe
+    if (hashTag === "#editRecipe") {
+      locals.editRecipe = true;
+      const recipeId = hashArray[1];
+      const { currentUser } = locals;
+
+      locals.currentRecipe = getItem(recipeId, currentUser.recipes);
+    }
   }
 
   const page = locals ? routes[hashTag](locals) : routes[hashTag]();

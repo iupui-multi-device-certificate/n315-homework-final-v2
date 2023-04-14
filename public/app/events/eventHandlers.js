@@ -2,7 +2,7 @@ import { getTextAfterCharacter } from "../helpers.js";
 import { recipeDetailView } from "../views/recipeDetailView.js";
 import { MESSAGES } from "../messages.js";
 import { renderListItem } from "../views/recipeFormView.js";
-import { redirectPage } from "../helpers.js";
+import { redirectPage, getItem } from "../helpers.js";
 
 export const handleLogout = () => {
   firebase.auth().signOut();
@@ -35,8 +35,15 @@ export const handleDeleteButtonClick = async (e, currentUser) => {
 
 export const handleAddItemButtonClick = (e) => {
   const splitId = e.target.parentElement.id.split("-");
+
   const newId = parseInt(splitId[1]) + 1;
-  const newItem = renderListItem(splitId[0], newId);
+
+  //pass as object now, explicitly name the keys
+  const newItem = renderListItem({
+    itemType: splitId[0],
+    item: null,
+    index: newId,
+  });
   e.target.parentElement.insertAdjacentHTML("afterend", newItem);
 };
 
@@ -66,8 +73,8 @@ export const handleRecipeImageChange = (e) => {
 // click handler to get detail of item, e.g. blog & gallery items
 //since we're only getting recipes make this more specific
 
-const getItem = (itemID, items) =>
-  items.find((item) => itemID == item.recipeId);
+// const getItem = (itemID, items) =>
+//   items.find((item) => itemID == item.recipeId);
 
 const itemClickHandler = (itemID, view, items) => {
   // const getItem = (itemID) => items.find((item) => itemID == item.recipeId);

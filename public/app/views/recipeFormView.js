@@ -5,7 +5,7 @@
 
 //set type as button to prevent it from submitting form
 // https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms
-export const renderListItem = (itemType, index) => `
+export const renderListItem = ({ itemType, item = null, index }) => `
   <div class="recipe-list-item" id="${itemType}-${index}">
     <input
       type="text"
@@ -16,6 +16,7 @@ export const renderListItem = (itemType, index) => `
       } #${index}"
       aria-label="input-${itemType}-${index}"
       class="form-element "
+      value="${item ? item : ""}"
     />
     <button type="button" class="btn--round btn--rose btn--addItem btn--logged-in" >
       +
@@ -27,16 +28,26 @@ export const renderListItem = (itemType, index) => `
 // https://stackoverflow.com/questions/34189370/how-to-repeat-an-element-n-times-using-jsx-and-lodash
 //use underscore not e like in https://www.carlrippon.com/repeat-element-n-times-in-jsx/
 const n = 3;
-const renderListItems = (itemType) => `
+const renderInitialListItems = (itemType) => `
 
-  ${[...Array(n)].map((_, i) => renderListItem(itemType, i + 1)).join("")}
+  ${[...Array(n)]
+    .map((_, i) => renderListItem({ itemType, item: null, index: i + 1 }))
+    .join("")}
+`;
+
+const renderListItems = (itemType, items) => `
+
+  ${items
+    .map((item, i) => renderListItem({ itemType, item, index: i + 1 }))
+    .join("")}
 `;
 
 //TODO: maybe add a close button on the edit version??
+//Skip trying to get previous image info since long URL & has token. In real life, this would have a drag/drop photo uploader that would make it to allow preload & view image.
 export const recipeFormView = ({
   currentUser,
   editRecipe = false,
-  recipeId = "",
+  currentRecipe = null,
 }) => `
   <section class="content section-recipe-form">
     <form class="recipe-form" id="recipe-form">      
@@ -50,7 +61,9 @@ export const recipeFormView = ({
       <fieldset>
         <div class="file-input">
           <!-- extra div to get a custom placeholder since can't replace button text -->
-          <div id="imgUploadText">Add Recipe Image</div>
+          <div id="imgUploadText">${
+            editRecipe ? "Edit Recipe Image" : "Add Recipe Image"
+          }</div>
           <input
             type="file"
             name="recipeImage"
@@ -72,6 +85,7 @@ export const recipeFormView = ({
           placeholder="Recipe Name (required)"
           aria-label="recipeName"
           class="form-element"
+          value="${currentRecipe ? currentRecipe.name : ""}"
           required
         />
         
@@ -82,6 +96,7 @@ export const recipeFormView = ({
           placeholder="Recipe Description"
           aria-label="recipeDescription"
           class="form-element"
+          value="${currentRecipe ? currentRecipe.description : ""}"
         />
 
         <input
@@ -91,6 +106,7 @@ export const recipeFormView = ({
           placeholder="Recipe Total Time"
           aria-label="recipeTotalTime"
           class="form-element"
+          value="${currentRecipe ? currentRecipe.time : ""}"
         />
 
         <input
@@ -100,15 +116,24 @@ export const recipeFormView = ({
           placeholder="Recipe Serving Size"
           aria-label="recipeServingSize"
           class="form-element"
+          value="${currentRecipe ? currentRecipe.servings : ""}"
         />
       </fieldset>
       <fieldset class="ingredientsList">
         <legend>Enter Ingredients:</legend>
-        ${renderListItems("ingredient")}
+        ${
+          currentRecipe
+            ? renderListItems("ingredient", currentRecipe.ingredients)
+            : renderInitialListItems("ingredient")
+        }
       </fieldset>
       <fieldset class="instructionsList">
         <legend>Enter Instructions:</legend>
-        ${renderListItems("instruction")}
+        ${
+          currentRecipe
+            ? renderListItems("instruction", currentRecipe.instructions)
+            : renderInitialListItems("instruction")
+        }
       </fieldset>
       <input
         type="submit"
