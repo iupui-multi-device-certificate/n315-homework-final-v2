@@ -13,9 +13,11 @@ $totalTitleWidth: calc(1.688rem + 0.625rem);
   height: fit-content;
 }
 
-.close-holder {
-  display: flex;
-  justify-content: flex-end;
+.view-recipe {
+  .close-holder {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 // https://every-layout.dev/layouts/sidebar/

@@ -118,6 +118,18 @@ legend {
   font-weight: bold;
 }
 
+.recipe-form {
+  .close-holder {
+    display: none;
+  }
+}
+
+.recipe-form .recipe-edit {
+  .close-holder {
+    display: flex;
+  }
+}
+
 @media only screen and (max-width: $breakpoint-md) {
   .form-element,
   .file-input {

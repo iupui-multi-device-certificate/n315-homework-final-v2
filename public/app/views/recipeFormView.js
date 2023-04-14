@@ -50,16 +50,19 @@ export const recipeFormView = ({
   currentRecipe = null,
 }) => `
   <section class="content section-recipe-form">
-    <form class="recipe-form ${
-      editRecipe ? "recipe-edit" : ""
-    } id="recipe-form">      
-      <h1 class="form-title">${
-        currentUser
-          ? `${currentUser.firstName}, ${
-              editRecipe ? "edit" : "create"
-            } your recipe!`
-          : `Sign in to create a recipe!`
-      }</h1>
+  <form class="recipe-form ${
+    editRecipe ? "recipe-edit" : ""
+  }" id="recipe-form">      
+      <div class="close-holder">
+        <button class="btn--close" id="close-recipe-form"><span class="sr-only">Close</span></button>
+      </div>
+    <h1 class="form-title">${
+      currentUser
+        ? `${currentUser.firstName}, ${
+            editRecipe ? "edit" : "create"
+          } your recipe!`
+        : `Sign in to create a recipe!`
+    }</h1>
       <fieldset>
         <div class="file-input">
           <!-- extra div to get a custom placeholder since can't replace button text -->

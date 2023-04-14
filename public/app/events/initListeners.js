@@ -14,6 +14,8 @@ import {
   handleDeleteButtonClick,
 } from "./eventHandlers.js";
 
+import { redirectPage } from "../helpers.js";
+
 //add to document since these are dynamically created.
 
 export const initListeners = () => {
@@ -36,7 +38,22 @@ export const initListeners = () => {
     }
 
     if (e.target.classList.contains("btn--close")) {
-      window.location.reload();
+      //TODO: fix reload flashes [low priority]
+      //have to reload b/c using anchors/ routing to load & not click handler
+      //cleans out so createRecipe loads instead of editRecipe
+      if (e.target.id === "close-recipe-form") {
+        //make sure this does not submit the form
+        e.preventDefault();
+        if (e.target.form.classList.contains("recipe-edit")) {
+          redirectPage("#yourRecipes");
+          //this cleans it out so not cached in createRecipe
+          window.location.reload();
+        }
+      }
+
+      if (e.target.id === "close-recipe-detail") {
+        window.location.reload();
+      }
     }
   });
 

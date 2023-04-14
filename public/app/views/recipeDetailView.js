@@ -10,7 +10,7 @@ const renderListItems = (listItems) => `
 export const recipeDetailView = (recipe) => `
   <section class="view-recipe content">
     <div class="close-holder">
-      <button class="btn--close"><span class="sr-only">Close</span></button>
+      <button class="btn--close" id="close-recipe-detail"><span class="sr-only">Close</span></button>
     </div>
     <div class="top">
       <header class="recipe-header">
