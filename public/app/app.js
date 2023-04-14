@@ -50,6 +50,8 @@ const onAuthInit = () => {
             const data = change.doc.data();
 
             //TODO: still seeing this called 2x, esp. w/ image & slower connection. Does not create duplicates in db or state.
+
+            //since we're not using React to manage state, we are mutating it
             if (change.type === "added") {
               console.log(
                 `Recipe added with id: ${change.doc.id}`,
@@ -72,6 +74,13 @@ const onAuthInit = () => {
                 `Recipe removed with id: ${change.doc.id}`,
                 change.doc.data()
               );
+              const indexOfRecipe = allRecipes.findIndex((recipe) => {
+                return recipe.recipeId === change.doc.id;
+              });
+
+              console.log("index to delete", indexOfRecipe);
+
+              allRecipes.splice(indexOfRecipe, 1);
             }
           });
 

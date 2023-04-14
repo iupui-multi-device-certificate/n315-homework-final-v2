@@ -141,6 +141,7 @@ const getValuesFromInputsByName = (nameOfList) => {
   return valuesArray;
 };
 
+//TODO: move this to own file, not helpers
 const addRecipe = async (userId, recipe) => {
   let result = {
     success: false,

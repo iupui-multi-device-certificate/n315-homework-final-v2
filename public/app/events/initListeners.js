@@ -11,6 +11,7 @@ import {
   handleAddItemButtonClick,
   handleRecipeImageChange,
   handleViewButtonClick,
+  handleDeleteButtonClick,
 } from "./eventHandlers.js";
 
 //add to document since these are dynamically created.
@@ -34,6 +35,7 @@ export const initListeners = () => {
       handleAddItemButtonClick(e);
     }
 
+    //TODO: fix reload goes to home page
     if (e.target.classList.contains("btn--close")) {
       window.location.reload();
     }
@@ -66,6 +68,10 @@ export const initLoggedInListeners = (currentUser) => {
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--view") && currentUser) {
       handleViewButtonClick(e, currentUser);
+    }
+
+    if (e.target.classList.contains("btn--delete") && currentUser) {
+      handleDeleteButtonClick(e, currentUser);
     }
   });
 

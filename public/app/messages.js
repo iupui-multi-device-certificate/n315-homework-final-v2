@@ -19,4 +19,6 @@ export const MESSAGES = {
     "Image upload failed. Contact your admin for further assistance",
   SUCCESS_RECIPE_CREATED: "Recipe created.",
   ERROR_RECIPE_NOT_CREATED: "Error creating recipe. Please try again later.",
+  CONFIRM_RECIPE_DELETE: "Are you sure you want to delete this recipe?",
+  SUCCESS_RECIPE_DELETED: "Recipe deleted.",
 };
