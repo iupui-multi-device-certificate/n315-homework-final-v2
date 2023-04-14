@@ -44,13 +44,16 @@ const renderListItems = (itemType, items) => `
 
 //TODO: maybe add a close button on the edit version??
 //Skip trying to get previous image info since long URL & has token. In real life, this would have a drag/drop photo uploader that would make it to allow preload & view image.
+// Use hidden input to pass recipeId when editing
 export const recipeFormView = ({
   currentUser,
   editRecipe = false,
   currentRecipe = null,
 }) => `
   <section class="content section-recipe-form">
-    <form class="recipe-form" id="recipe-form">      
+    <form class="recipe-form ${
+      editRecipe ? "recipe-edit" : ""
+    } id="recipe-form">      
       <h1 class="form-title">${
         currentUser
           ? `${currentUser.firstName}, ${
@@ -135,6 +138,7 @@ export const recipeFormView = ({
             : renderInitialListItems("instruction")
         }
       </fieldset>
+      <input type="hidden" value="${editRecipe ? currentRecipe.recipeId : ""}" id="recipeIdInput"/>
       <input
         type="submit"
         value="${editRecipe ? "Submit Changes" : "Create Recipe"}"

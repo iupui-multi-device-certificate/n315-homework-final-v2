@@ -2,7 +2,7 @@
 
 import { uploadImage } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
-import { addRecipe } from "../models/recipe.js";
+import { addRecipe, updateRecipe } from "../models/recipe.js";
 
 export const handleSignupSubmit = (e, signupForm) => {
   e.preventDefault();
@@ -98,13 +98,18 @@ export const handleLoginSubmit = (e, loginForm) => {
     });
 };
 
-export const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
+export const handleRecipeSubmit = async (e, currentUser) => {
   e.preventDefault();
+
+  const recipeForm = e.target;
+
+  const editMode = e.target.classList.contains("recipe-edit") ? true : false;
+
+  console.log("editMode", editMode);
 
   //don't destructure since recipes could be null
   const userId = currentUser.userId;
 
-  // let recipes = [];
   let ingredients = [];
   let instructions = [];
 
@@ -116,6 +121,8 @@ export const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
   const imgUrl = await uploadImage(imageToUpload);
   //check if empty url in case had issue
 
+  let recipeId = document.getElementById("recipeIdInput").value;
+
   let recipe = {
     imgUrl: imgUrl ? imgUrl : "",
     name: recipeForm["recipeName"].value,
@@ -126,7 +133,14 @@ export const handleRecipeSubmit = async (e, recipeForm, currentUser) => {
     instructions,
   };
 
-  const result = await addRecipe(userId, recipe);
+  let result = { success: false, message: "" };
+
+  if (editMode) {
+    result = await updateRecipe(userId, recipeId, recipe);
+  } else {
+    console.log("we're adding");
+    result = await addRecipe(userId, recipe);
+  }
 
   recipeForm.reset();
   alert(result.message);

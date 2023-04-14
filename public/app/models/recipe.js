@@ -59,6 +59,36 @@ export const deleteRecipe = async (userId, recipeId) => {
   return result;
 };
 
+export const updateRecipe = async (userId, recipeId, recipe) => {
+  let result = {
+    success: false,
+    message: "",
+  };
+  await firebase
+    .firestore()
+    .collection("Users")
+    .doc(userId)
+    .collection("Recipes")
+    .doc(recipeId)
+    .update(recipe)
+    .then(() => {
+      console.log("recipe updated with id", recipeId);
+
+      result = {
+        success: true,
+        message: MESSAGES.SUCCESS_RECIPE_UPDATED + " Recipe id: " + recipeId,
+      };
+    })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+      result = {
+        success: false,
+        message: MESSAGES.ERROR_RECIPE_NOT_CREATED,
+      };
+    });
+  return result;
+};
+
 //TODO: rename/rework since we're just getting a recipe, it's not generic
 export const getRecipe = (itemID, items) =>
   items.find((item) => itemID == item.recipeId);

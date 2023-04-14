@@ -21,4 +21,6 @@ export const MESSAGES = {
   ERROR_RECIPE_NOT_CREATED: "Error creating recipe. Please try again later.",
   CONFIRM_RECIPE_DELETE: "Are you sure you want to delete this recipe?",
   SUCCESS_RECIPE_DELETED: "Recipe deleted.",
+  SUCCESS_RECIPE_UPDATED: "Recipe updated.",
+  ERROR_RECIPE_NOT_UPDATED: "Error updating recipe. Please try again later.",
 };

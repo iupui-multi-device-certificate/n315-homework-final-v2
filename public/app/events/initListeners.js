@@ -75,10 +75,8 @@ export const initLoggedInListeners = (currentUser) => {
   });
 
   document.addEventListener("submit", (e) => {
-    //recipeForm not defined error occurred b/c had set id of form to recipeForm and was using directly instead of checking for closest.
-    const recipeForm = e.target.closest("#recipe-form");
-    if (recipeForm && currentUser) {
-      handleRecipeSubmit(e, recipeForm, currentUser);
+    if (e.target.classList.contains("recipe-form") && currentUser) {
+      handleRecipeSubmit(e, currentUser);
     }
   });
 };
