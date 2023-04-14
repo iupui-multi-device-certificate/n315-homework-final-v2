@@ -35,6 +35,7 @@ The Jungle Cook is a Vanilla JavaScript Single-Page CRUD Application that allows
 
 ## ISSUES
 
+- Creating recipe with image causes firebase modify event to trigger and can cause duplicates in state
 - Font loading issue in Firefox:
   - downloadable font: maxp: Bad maxZones: 3 (font-family: "Gill Sans" style:normal weight:300 stretch:100 src index:0) source: http://localhost:5000/css/fonts/GillSans-Light.ttf
   - Potential fix would be to use modern woff fonts which are web safe fonts rather than desktop fonts.
@@ -66,6 +67,7 @@ The Jungle Cook is a Vanilla JavaScript Single-Page CRUD Application that allows
 
 ## TODO
 
+- Fix duplicates when create recipe w/ image
 - Protect the createRecipe route so it redirects to login if not logged in and goes back
 - Hide close button on createRecipe page
 - Require user first name

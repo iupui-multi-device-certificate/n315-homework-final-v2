@@ -62,6 +62,7 @@ const onAuthInit = () => {
                 ...data,
               });
             }
+            //TODO: fix causes duplicates when have image
             if (change.type === "modified") {
               console.log(
                 `Recipe modified with id: ${change.doc.id}`,
