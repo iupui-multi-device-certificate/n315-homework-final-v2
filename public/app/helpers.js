@@ -112,6 +112,4 @@ export const toggleShowLoggedIn = (currentUser) => {
   }
 };
 
-//TODO: rename/rework since we're just getting a recipe, it's not generic
-export const getItem = (itemID, items) =>
-  items.find((item) => itemID == item.recipeId);
+

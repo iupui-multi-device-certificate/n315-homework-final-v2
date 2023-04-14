@@ -2,7 +2,7 @@ import { homeView } from "./views/homeView.js";
 import { recipesView } from "./views/recipesView.js";
 import { recipeFormView } from "./views/recipeFormView.js";
 import { loginView } from "./views/loginView.js";
-import { getItem } from "./helpers.js";
+import { getRecipe } from "./models/recipe.js";
 import { toggleCurrentPage, toggleRecipeHero } from "./helpers.js";
 
 //just provide name of view to map to route, render will actually call the function
@@ -44,7 +44,7 @@ export const render = (locals) => {
       const recipeId = hashArray[1];
       const { currentUser } = locals;
 
-      locals.currentRecipe = getItem(recipeId, currentUser.recipes);
+      locals.currentRecipe = getRecipe(recipeId, currentUser.recipes);
     }
   }
 

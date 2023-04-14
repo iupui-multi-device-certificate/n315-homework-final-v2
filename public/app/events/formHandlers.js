@@ -2,7 +2,7 @@
 
 import { uploadImage } from "../helpers.js";
 import { MESSAGES } from "../messages.js";
-// import { redirectPage } from "./helpers.js";
+import { addRecipe } from "../models/recipe.js";
 
 export const handleSignupSubmit = (e, signupForm) => {
   e.preventDefault();
@@ -139,34 +139,4 @@ const getValuesFromInputsByName = (nameOfList) => {
 
   const valuesArray = Array.from(elementList).map((el) => el.value);
   return valuesArray;
-};
-
-//TODO: move this to own file, not helpers
-const addRecipe = async (userId, recipe) => {
-  let result = {
-    success: false,
-    message: "",
-  };
-  await firebase
-    .firestore()
-    .collection("Users")
-    .doc(userId)
-    .collection("Recipes")
-    .add(recipe)
-    .then((docRef) => {
-      console.log(MESSAGES.SUCCESS_RECIPE_CREATED + " RecipeID:", docRef.id);
-
-      result = {
-        success: true,
-        message: MESSAGES.SUCCESS_RECIPE_CREATED,
-      };
-    })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-      result = {
-        success: false,
-        message: MESSAGES.ERROR_RECIPE_NOT_CREATED,
-      };
-    });
-  return result;
 };
