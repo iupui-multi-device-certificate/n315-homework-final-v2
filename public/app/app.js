@@ -103,16 +103,15 @@ const onAuthInit = () => {
       toggleShowLoggedIn(currentUser);
       locals = { currentUser, allRecipes };
       console.log("on AuthStateChanged > user logged in ");
-      redirectPage();
     } else {
-      //todo: remove loggedInListeners
+      //TODO: remove loggedInListeners
       toggleShowLoggedIn(null);
       locals = { currentUser: null, allRecipes };
       console.log("on AuthStateChanged > user logged out");
-      redirectPage();
     }
 
     window.onhashchange = () => render(locals);
+    render(locals);
   });
 };
 

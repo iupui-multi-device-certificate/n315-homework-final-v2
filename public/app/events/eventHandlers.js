@@ -3,13 +3,15 @@ import { recipeDetailView } from "../views/recipeDetailView.js";
 import { MESSAGES } from "../messages.js";
 import { renderListItem } from "../views/recipeFormView.js";
 import { redirectPage } from "../helpers.js";
-import { render } from "../router.js";
 
 export const handleLogout = () => {
   firebase.auth().signOut();
   alert(MESSAGES.INFO_LOGOUT);
 
-  //this might be redundant?
+  /* 
+    NOTE: this keeps the allRecipes array but in the console.logs the count of the number of items in the allRecipes array.
+    Be aware because it looks like it wipes them out and it isn't.
+  */
   redirectPage();
 };
 
@@ -25,7 +27,6 @@ export const handleDeleteButtonClick = async (e, currentUser) => {
     const result = await deleteRecipe(currentUser.userId, currentId);
     alert(result.message);
 
-    //TODO: fix reload goes to home page
     window.location.reload();
   } else {
     console.log("Delete recipe canceled.");

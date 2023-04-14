@@ -35,7 +35,6 @@ export const initListeners = () => {
       handleAddItemButtonClick(e);
     }
 
-    //TODO: fix reload goes to home page
     if (e.target.classList.contains("btn--close")) {
       window.location.reload();
     }
