@@ -21,7 +21,7 @@ The Jungle Cook is a Vanilla JavaScript Single-Page CRUD Application that allows
 
 ## What's new in version 2.0
 
-- Implements CRUD (except update)
+- Implements CRUD
 - Implements passing data to the routes via a locals variable (similar to Express)
 - Implements user feedback and error handling
 - Implements browse recipes which shows all recipes not just the user's recipes (re-uses the view page)
@@ -50,9 +50,3 @@ The Jungle Cook is a Vanilla JavaScript Single-Page CRUD Application that allows
 - Using LocalStorage would have been an easier option, but then I would not have learned the state part as thoroughly and appreciate the need for frameworks like React.
 
 ## TODO
-
-- Implement the update part of CRUD.
-  - Re-use the recipeForm that the Create Recipe page uses with a flag for edit vs. create.
-  - Load recipe to be edited
-  - Firestore update function
-  - Update local state accordingly

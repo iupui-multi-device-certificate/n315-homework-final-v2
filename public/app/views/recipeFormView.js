@@ -1,4 +1,3 @@
-//TODO: maybe add a flag so can toggle edit vs create
 //TODO: recipeDescription - make textarea with character limit so fits detail page
 
 //on array inputs use name[] to indicate these belong to same array
@@ -138,7 +137,9 @@ export const recipeFormView = ({
             : renderInitialListItems("instruction")
         }
       </fieldset>
-      <input type="hidden" value="${editRecipe ? currentRecipe.recipeId : ""}" id="recipeIdInput"/>
+      <input type="hidden" value="${
+        editRecipe ? currentRecipe.recipeId : ""
+      }" id="recipeIdInput"/>
       <input
         type="submit"
         value="${editRecipe ? "Submit Changes" : "Create Recipe"}"

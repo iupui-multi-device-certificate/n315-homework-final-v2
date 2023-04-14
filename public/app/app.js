@@ -68,6 +68,22 @@ const onAuthInit = () => {
                 `Recipe modified with id: ${change.doc.id}`,
                 change.doc.data()
               );
+
+              //can't just replace b/c adding ownerId in our state
+              //remove it then add the updated version
+              const indexOfRecipe = allRecipes.findIndex((recipe) => {
+                return recipe.recipeId === change.doc.id;
+              });
+
+              allRecipes.splice(indexOfRecipe, 1);
+
+              const updatedRecipe = {
+                ownerId: parentCollectionRef.parent.id,
+                recipeId,
+                ...data,
+              };
+
+              allRecipes.push(updatedRecipe);
             }
             if (change.type === "removed") {
               console.log(
